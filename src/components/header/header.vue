@@ -4,32 +4,28 @@
     <ul>
       <li>
         <a
-          href="http://router.vuejs.org/"
-          target="_blank"
+          href="#/"
         >
         <img src="src/assets/logo.png">
         </a>
       </li>
       <li>
         <a
-          href="http://router.vuejs.org/"
-          target="_blank"
+          href="#/"
         >
           My CV
         </a>
       </li>
       <li>
         <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
+          href="#/my-profile"
         >
           My Profile
         </a>
       </li>
       <li>
         <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
+          href="#/"
         >
           Create CV
         </a>
