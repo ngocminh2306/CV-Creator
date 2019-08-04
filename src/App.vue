@@ -6,7 +6,7 @@
         <HeaderMain></HeaderMain>
 
         <router-view/>
-
+        
         <FooterMain></FooterMain>
       </div>
     </div>
@@ -37,6 +37,7 @@ export default {
   height: 100vh;
 }
 .content-wrapper {
+  background-color: #f0f2f5;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

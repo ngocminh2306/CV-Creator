@@ -25,7 +25,7 @@
       </li>
       <li>
         <a
-          href="#/"
+          href="#/create-cv"
         >
           Create CV
         </a>
