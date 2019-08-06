@@ -38,7 +38,7 @@ export default new Router({
         },
         {
           path: '/my-profile/infomation',
-          name: 'infomation',
+          name: 'infomation-full-path',
           component: infomation,
         }, {
           path: '/my-profile/education',

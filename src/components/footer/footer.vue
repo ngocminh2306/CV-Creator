@@ -11,7 +11,6 @@ export default {
   name: "FooterMain",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
     };
   }
 };

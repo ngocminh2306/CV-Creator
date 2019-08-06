@@ -3,20 +3,17 @@
     <div class="content">
       <div class="slide">
         <!-- <router-link :to="{ name: 'infomation', params: { userId: 123 }}">User</router-link> -->
-        <router-link to="/my-profile/infomation">Infomation 333</router-link>
+        <router-link to="/my-profile/infomation">Infomation</router-link>
+        <router-link to="/my-profile/career-goal">Career Goal</router-link>
         <router-link to="/my-profile/education">Education</router-link>
         <router-link to="/my-profile/project">Project</router-link>
-        <router-link to="/my-profile/achievement">achievement</router-link>
-        <router-link to="/my-profile/career-goal">CareerGoal</router-link>
-        <router-link to="/my-profile/LanguageAndHobby">LanguageAndHobby</router-link>
-        <router-link to="/my-profile/WorkingExperience">WorkingExperience</router-link>
-        <router-link to="/my-profile/WorkingSkill">WorkingSkill</router-link>
+        <router-link to="/my-profile/achievement">Achievement</router-link>
+        <router-link to="/my-profile/LanguageAndHobby">Language And Hobby</router-link>
+        <router-link to="/my-profile/WorkingExperience">Working Experience</router-link>
+        <router-link to="/my-profile/WorkingSkill">Working Skill</router-link>
       </div>
       <div class="main">
-        <div>
-          <h3>Education</h3>
-          <router-view/>
-        </div>
+        <router-view/>
       </div>
     </div>
   </div>
@@ -29,25 +26,25 @@ export default {
   components: {},
   name: "my-profile",
   data() {
-    console.log(this.$children);
-    return {
-      msg: "Welcome to Your Vue.js App"
-    };
+    return {};
   },
   created() {}
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 .content-my-profile {
   flex: 3 auto;
   display: block;
 }
 .content-my-profile .content {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   padding: 60px;
+  max-width: 1180px;
 }
 .slide {
   display: flex;
@@ -73,6 +70,8 @@ export default {
   background: #fff;
 }
 .main {
+  display: flex;
   flex: 1;
+  padding-left: 80px;
 }
 </style>
