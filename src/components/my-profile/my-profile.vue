@@ -6,11 +6,11 @@
         <router-link to="/my-profile/infomation">Infomation</router-link>
         <router-link to="/my-profile/career-goal">Career Goal</router-link>
         <router-link to="/my-profile/education">Education</router-link>
-        <router-link to="/my-profile/project">Project</router-link>
         <router-link to="/my-profile/achievement">Achievement</router-link>
-        <router-link to="/my-profile/LanguageAndHobby">Language And Hobby</router-link>
         <router-link to="/my-profile/WorkingExperience">Working Experience</router-link>
+        <router-link to="/my-profile/project">Project</router-link>
         <router-link to="/my-profile/WorkingSkill">Working Skill</router-link>
+        <router-link to="/my-profile/LanguageAndHobby">Language And Hobby</router-link>      
       </div>
       <div class="main">
         <router-view/>

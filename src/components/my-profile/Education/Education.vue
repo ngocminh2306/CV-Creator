@@ -18,9 +18,9 @@
           </label>
         </div>
         <div class="input-row">
-          <input class="From" required v-model="education.fromDate" placeholder="From">
+          <input class="From" type="date" required v-model="education.fromDate" placeholder="From">
           <span style="margin:auto 0">&nbsp;~&nbsp;</span>
-          <input class="To" required v-model="education.toDate" placeholder="To">
+          <input class="To" type="date" required v-model="education.toDate" placeholder="To">
           <i class="des">Leave the 'To' field blank if it is the current time!</i>
         </div>
       </div>
@@ -44,10 +44,8 @@
       <div class="my-education-wapper">
         <div class="item">
           <div class="title-item">
-
           </div>
-          <div class="content-item">
-            
+          <div class="content-item">           
           </div>
         </div>      
       </div>
