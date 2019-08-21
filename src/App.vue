@@ -7,7 +7,7 @@
 
         <router-view/>
         
-        <FooterMain></FooterMain>
+        <!-- <FooterMain></FooterMain> -->
       </div>
     </div>
   </div>
