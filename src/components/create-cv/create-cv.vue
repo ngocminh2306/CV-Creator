@@ -4,110 +4,57 @@
       <swiper :options="swiperOption">
         <!-- slides -->
         <swiper-slide>
-          <img
+          <img style="cursor: pointer;"  
             v-on:click="slideClick(1)"
             src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
             height="120px"
             width="120px"
           >
+          <span>Spring cv</span>
         </swiper-slide>
         <swiper-slide>
-          <img
+          <img style="cursor: pointer;"  
+            v-on:click="slideClick(2)"
             src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
             height="120px"
             width="120px"
           >
+          <span>default cv</span>
         </swiper-slide>
         <swiper-slide>
-          <img
+          <img style="cursor: pointer;"  
             src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
             height="120px"
             width="120px"
           >
+          <span>default cv</span>
         </swiper-slide>
         <swiper-slide>
-          <img
+          <img style="cursor: pointer;"  
             src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
             height="120px"
             width="120px"
           >
+           <span>default cv</span>
         </swiper-slide>
         <swiper-slide>
-          <img
+          <img style="cursor: pointer;"  
             src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
             height="120px"
             width="120px"
           >
+           <span>default cv</span>
         </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
-      <form id="cv" ref="cv" class="create-cvform">
+      <form class="create-cvform">
         <div class="title">
           <label>Time</label>
           <input placeholder="Title from 6 to 250 characters" v-model="params.title">
         </div>
-        <div class="editor-container">
-          <div class="introduction">
-            <div class="introduction-left">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-            <div class="introduction-right">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-          </div>
-          <div class="career">
-            <div class="introduction-left">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-            <div class="introduction-right">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-          </div>
-          <div class="career">
-            <div class="introduction-left">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-            <div class="introduction-right">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-          </div>
-          <div class="career">
-            <div class="introduction-left">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-            <div class="introduction-right">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-          </div>
-          <div class="career">
-            <div class="introduction-left">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-            <div class="introduction-right">
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-              <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-            </div>
-          </div>
+        <div ref="cv" id="cv">
+          <cvtemplate :data="params" :type="type" :key="keyTemplate"></cvtemplate>
         </div>
       </form>
       <div style="padding: 44px">
@@ -118,23 +65,19 @@
 </template>
 
 <script>
+import cvtemplate from "@/components/templates/cvtemplate";
 import html2canvas from "html2canvas";
 export default {
+  components: { cvtemplate },
   name: "createCV",
   data() {
     return {
+      keyTemplate: 0,
+      type: "default/default-cv",
       params: {
         title: "Title from 6 to 260 characters",
         introduction: {
           name: "MINH"
-        }
-      },
-      editorOption: {
-        // some quill options
-        theme: "bubble",
-        placeholder: "Name",
-        modules: {
-          toolbar: [[], []]
         }
       },
       swiperOption: {
@@ -151,7 +94,12 @@ export default {
   },
   methods: {
     slideClick(i) {
-      console.log(i);
+      if (i == 1) {
+        this.type = "spring/spring-cv";
+      } else {
+        this.type = "default/default-cv";
+      }
+      this.keyTemplate++;
     },
     createPDF() {
       html2canvas(this.$refs["cv"], { width: 800, height: 1200 }).then(
@@ -177,6 +125,7 @@ export default {
 }
 .swiper-container {
   max-width: 60%;
+  margin: 44px auto;
 }
 .title {
   text-align: left;
@@ -186,30 +135,6 @@ export default {
   margin: 44px auto;
   width: 80%;
   padding: 44px;
-}
-.editor-container {
-  background-color: white;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
-}
-.introduction {
-  display: flex;
-  border-bottom: 1px solid #bbb;
-}
-.career{
-    border-bottom: 1px solid #bbb;
-}
-.quill-editor:hover {
-  background: #cdebf650;
-  border: 1px dotted gainsboro;
-}
-.introduction .introduction-left {
-  justify-content: space-between;
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-.introduction .introduction-right {
-  flex: 1;
 }
 .create-cv-btn {
   display: inline-block;

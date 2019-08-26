@@ -14,13 +14,14 @@ import 'quill/dist/quill.bubble.css'
 //
 import 'swiper/dist/css/swiper.css'
 
-Vue.use(VueAwesomeSwiper, /* { default global options } */)
-Vue.use(VueQuillEditor, /* { default global options } */)
+Vue.use(VueAwesomeSwiper)
+Vue.use(VueQuillEditor)
 // Vue.use(html2canvas)
 Vue.config.productionTip = false
 
+
 /* eslint-disable no-new */
-new Vue({ 
+new Vue({
   el: '#app',
   router,
   components: { App },

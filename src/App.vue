@@ -4,9 +4,7 @@
     <div class="body-wrapper">
       <div class="content-wrapper">
         <HeaderMain></HeaderMain>
-
         <router-view/>
-        
         <!-- <FooterMain></FooterMain> -->
       </div>
     </div>
@@ -16,9 +14,11 @@
 <script>
 import HeaderMain from "@/components/header/header";
 import FooterMain from "@/components/footer/footer";
+import Vue from "vue";
+
 export default {
   components: { HeaderMain, FooterMain },
-  name: "App"
+  name: "App",
 };
 </script>
 
@@ -41,6 +41,5 @@ export default {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  
 }
 </style>

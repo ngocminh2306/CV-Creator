@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { HTTP } from "../http-common";
 export default {
   components: {},
   name: "ListCv",
@@ -48,6 +49,16 @@ export default {
     return {
       msg: "Welcome to Your Vue.js App"
     };
+  },
+  mounted() {
+    HTTP.get(`posts`)
+      .then(response => {
+        console.log(response);
+        localStorage.setItem("user-info", "Minh");
+      })
+      .catch(e => {
+        console.log(e);
+      });
   }
 };
 </script>
@@ -60,7 +71,7 @@ export default {
 }
 .content {
   display: block;
-  margin: 20px auto;
+  margin: 66px auto;
   padding: 20px;
   width: 75%;
 }
@@ -120,7 +131,8 @@ export default {
   margin: 0px 10px;
   cursor: pointer;
 }
-.item-action button.delete-action, .content-item .item-action button.delete-action:hover {
+.item-action button.delete-action,
+.content-item .item-action button.delete-action:hover {
   color: red;
   border: 1px solid red;
 }

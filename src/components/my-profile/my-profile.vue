@@ -2,7 +2,6 @@
   <div class="content-my-profile">
     <div class="content">
       <div class="slide">
-        <!-- <router-link :to="{ name: 'infomation', params: { userId: 123 }}">User</router-link> -->
         <router-link to="/my-profile/infomation">Infomation</router-link>
         <router-link to="/my-profile/career-goal">Career Goal</router-link>
         <router-link to="/my-profile/education">Education</router-link>
@@ -10,7 +9,7 @@
         <router-link to="/my-profile/WorkingExperience">Working Experience</router-link>
         <router-link to="/my-profile/project">Project</router-link>
         <router-link to="/my-profile/WorkingSkill">Working Skill</router-link>
-        <router-link to="/my-profile/LanguageAndHobby">Language And Hobby</router-link>      
+        <router-link to="/my-profile/LanguageAndHobby">Language And Hobby</router-link>
       </div>
       <div class="main">
         <router-view/>
@@ -21,7 +20,6 @@
 
 <script>
 import Vue from "vue";
-
 export default {
   components: {},
   name: "my-profile",
@@ -31,16 +29,13 @@ export default {
   created() {}
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-
 <style scoped>
 .content-my-profile {
   flex: 3 auto;
   display: block;
 }
 .content-my-profile .content {
-  margin: 0 auto;
+  margin: 66px auto;
   display: flex;
   flex-direction: row;
   padding: 60px;
