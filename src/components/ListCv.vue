@@ -3,7 +3,7 @@
     <div class="content">
       <div class="title-list-cv">
         <label>List CV</label>
-        <button class="btn-add-new">Add new</button>
+        <a class="btn-add-new" type="button" href="#/create-cv">Add new</a>
       </div>
       <div class="resume-list">
         <div class="content-item">
@@ -51,14 +51,11 @@ export default {
     };
   },
   mounted() {
-    HTTP.get(`posts`)
-      .then(response => {
-        console.log(response);
-        localStorage.setItem("user-info", "Minh");
-      })
-      .catch(e => {
-        console.log(e);
-      });
+    HTTP.get(`/UserInfo/Get`, {
+      headers: { Authorization: 'Bearer ' + localStorage.getItem("token") }}).then(res =>{
+        // localStorage.setItem("user",JSON.stringify(res.data.result))
+        console.log(res);
+    })
   }
 };
 </script>
@@ -87,6 +84,7 @@ export default {
   font-weight: 900;
 }
 .btn-add-new {
+  text-decoration: none;
   max-width: 100px;
   flex: auto;
   color: #fff;

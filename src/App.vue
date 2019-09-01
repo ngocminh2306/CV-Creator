@@ -3,7 +3,7 @@
     <!-- <img src="./assets/logo.png"> -->
     <div class="body-wrapper">
       <div class="content-wrapper">
-        <HeaderMain></HeaderMain>
+        <HeaderMain :key="header_key" @reset="reloadHeader()"></HeaderMain>
         <router-view/>
         <!-- <FooterMain></FooterMain> -->
       </div>
@@ -19,6 +19,17 @@ import Vue from "vue";
 export default {
   components: { HeaderMain, FooterMain },
   name: "App",
+  data() {
+    return {
+      header_key: 0
+    };
+  },
+  methods: {
+    reloadHeader(){
+      this.header_key += 1;
+      console.log(this.header_key);
+    }
+  }
 };
 </script>
 

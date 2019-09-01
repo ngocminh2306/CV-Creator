@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import VueQuillEditor from 'vue-quill-editor'
+import VueRx from 'vue-rx'
 //
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import html2canvas from 'html2canvas'
@@ -13,6 +14,8 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 //
 import 'swiper/dist/css/swiper.css'
+
+Vue.use(VueRx)
 
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueQuillEditor)
