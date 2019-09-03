@@ -3,47 +3,10 @@
     <div class="content">
       <swiper :options="swiperOption">
         <!-- slides -->
-        <swiper-slide>
-          <img style="cursor: pointer;"  
-            v-on:click="slideClick(1)"
-            src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
-            height="120px"
-            width="120px"
-          >
-          <span>Spring cv</span>
-        </swiper-slide>
-        <swiper-slide>
-          <img style="cursor: pointer;"  
-            v-on:click="slideClick(2)"
-            src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
-            height="120px"
-            width="120px"
-          >
-          <span>default cv</span>
-        </swiper-slide>
-        <swiper-slide>
-          <img style="cursor: pointer;"  
-            src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
-            height="120px"
-            width="120px"
-          >
-          <span>default cv</span>
-        </swiper-slide>
-        <swiper-slide>
-          <img style="cursor: pointer;"  
-            src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
-            height="120px"
-            width="120px"
-          >
-           <span>default cv</span>
-        </swiper-slide>
-        <swiper-slide>
-          <img style="cursor: pointer;"  
-            src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
-            height="120px"
-            width="120px"
-          >
-           <span>default cv</span>
+        <swiper-slide v-for="template in templates">
+          <img style="cursor: pointer;" v-on:click="slideClick(template.path)" src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png" height="120px" width="120px">
+          <span>{{template.title}}</span>
+          <div style="color:red">Lượt xem: {{template.viewCount}}</div>
         </swiper-slide>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
@@ -65,6 +28,7 @@
 </template>
 
 <script>
+import { HTTP } from "../../http-common";
 import cvtemplate from "@/components/templates/cvtemplate";
 import html2canvas from "html2canvas";
 export default {
@@ -75,8 +39,9 @@ export default {
       keyTemplate: 0,
       type: "default/default-cv",
       params: {
-        title: "Title from 6 to 260 characters",
+        title: "Title from 6 to 260 characters"
       },
+      templates: [],
       swiperOption: {
         slidesPerView: 6,
         slidesPerColumn: 1,
@@ -90,12 +55,8 @@ export default {
     };
   },
   methods: {
-    slideClick(i) {
-      if (i == 1) {
-        this.type = "spring/spring-cv";
-      } else {
-        this.type = "default/default-cv";
-      }
+    slideClick(path) {
+     this.type = path;
       this.keyTemplate++;
     },
     createPDF() {
@@ -108,6 +69,16 @@ export default {
         }
       );
     }
+  },
+  mounted() {
+    HTTP.get(`/services/app/CVTemplateService/GetTemplates`, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    }).then(res => {
+      console.log(res);
+      this.templates = res.data.result.items;
+    });
   }
 };
 </script>

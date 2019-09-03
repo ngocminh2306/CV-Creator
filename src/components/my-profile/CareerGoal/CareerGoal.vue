@@ -48,7 +48,7 @@ export default {
   methods: {
     commitCareerGoal: function() {
       const parsed = JSON.stringify(this.careerGoal);
-        localStorage.setItem('careerGoal', parsed);
+      localStorage.setItem("careerGoal", parsed);
     },
     onEditorBlur(quill) {
       console.log("editor blur!", quill);
@@ -69,9 +69,7 @@ export default {
       return this.$refs.myQuillEditor.quill;
     }
   },
-  mounted() {
-    console.log("this is current quill instance object", this.editor);
-  }
+  mounted() {}
 };
 </script>
 

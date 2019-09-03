@@ -46,16 +46,15 @@ export default {
   components: {},
   name: "ListCv",
   data() {
-    return {
-      msg: "Welcome to Your Vue.js App"
-    };
+    return {};
   },
   mounted() {
     HTTP.get(`/UserInfo/Get`, {
-      headers: { Authorization: 'Bearer ' + localStorage.getItem("token") }}).then(res =>{
-        // localStorage.setItem("user",JSON.stringify(res.data.result))
-        console.log(res);
-    })
+      headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+    }).then(res => {
+      // localStorage.setItem("user",JSON.stringify(res.data.result))
+      console.log(res);
+    });
   }
 };
 </script>

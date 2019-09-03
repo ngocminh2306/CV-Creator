@@ -1,12 +1,12 @@
 <script>
 export default {
-  name: "modal",
+  name: 'modal',
   methods: {
-    close() {
-      this.$emit("close");
+    close () {
+      this.$emit('close')
     }
   }
-};
+}
 </script>
 <template>
   <transition name="modal-fade">

@@ -30,7 +30,6 @@ export default {
     this.loader()
       .then(() => {
         this.component = () => this.loader();
-        console.log("this.component = () => this.loader();");
       })
       .catch(() => {
         this.component = () =>

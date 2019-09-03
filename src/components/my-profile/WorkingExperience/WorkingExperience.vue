@@ -1,6 +1,6 @@
 <template>
   <div class="workingExperience">
-   <form>
+    <form>
       <div class="input-content">
         <div class="label">
           <label>
@@ -19,7 +19,7 @@
         </div>
         <input v-model="workingExperience.time" placeholder="Time">
       </div>
-       <div class="input-content">
+      <div class="input-content">
         <div class="label">
           <label>
             Position
@@ -62,10 +62,10 @@ export default {
           ]
         }
       },
-       workingExperience: {
+      workingExperience: {
         company: "",
         time: "",
-        position: '',
+        position: "",
         description: ""
       }
     };

@@ -64,29 +64,29 @@
 </template>
 <script>
 export default {
-  name: "spring-cv",
+  name: 'spring-cv',
   props: [],
-  data() {
+  data () {
     return {
       editorOption: {
         // some quill options
-        theme: "bubble",
-        placeholder: "Name",
+        theme: 'bubble',
+        placeholder: 'Name',
         modules: {
           toolbar: [[], []]
         }
       },
       params: {
-        title: "Title from 6 to 260 characters",
+        title: 'Title from 6 to 260 characters',
         introduction: {
-          name: "MINH"
+          name: 'MINH'
         }
       }
-    };
+    }
   },
   computed: {},
-  mounted() {}
-};
+  mounted () {}
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -66,26 +66,26 @@
 </template>
 <script>
 export default {
-  name: "default-cv",
+  name: 'default-cv',
   props: [],
-  data() {
+  data () {
     return {
       editorOption: {
         // some quill options
-        theme: "bubble",
+        theme: 'bubble',
         // placeholder: "",
         modules: {
           toolbar: [[], []]
         }
       },
       params: {
-        title: "Title from 6 to 260 characters",
+        title: 'Title from 6 to 260 characters',
         introduction: {
           fullName: 'Tên của bạn',
-          birthday:'',
-          phonenumber:'Số điện thoại',
-          email:'email@gmail.com',
-          address:'Việt Nam'
+          birthday: '',
+          phonenumber: 'Số điện thoại',
+          email: 'email@gmail.com',
+          address: 'Việt Nam'
         },
         education: {
           graduationPlace: 'Đại học của bạn',
@@ -94,40 +94,40 @@ export default {
         }
       },
       selectedFile: null
-    };
+    }
   },
   methods: {
-    img_click() {
-      this.$refs["input-img"].click();
+    img_click () {
+      this.$refs['input-img'].click()
     },
-    onFileSelected(event) {
-      console.log(event.target.value);
-      var file  = event.target.files[0];
-      var reader  = new FileReader();
-      var preview = this.$refs["preview"];
-      reader.addEventListener("load", function () {
-        preview.src = reader.result;
-      }, false);
+    onFileSelected (event) {
+      console.log(event.target.value)
+      var file = event.target.files[0]
+      var reader = new FileReader()
+      var preview = this.$refs['preview']
+      reader.addEventListener('load', function () {
+        preview.src = reader.result
+      }, false)
       if (file) {
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file)
       }
-      this.selectedFile = window.URL.createObjectURL(event.target.files[0]);
+      this.selectedFile = window.URL.createObjectURL(event.target.files[0])
     }
   },
   computed: {},
-  mounted() {
-    let userInfo = JSON.parse(localStorage.getItem('user'));
-    this.params.introduction.fullName = userInfo.user.fullName;
-    this.params.introduction.birthday = userInfo.birthday;
-    this.params.introduction.phonenumber = userInfo.phone_number;
-    this.params.introduction.email = userInfo.user.emailAddress;
-    this.params.introduction.address = userInfo.address;
-    //education
-    this.params.education.graduationPlace = userInfo.education.graduationPlace;
-    this.params.education.name = userInfo.education.name;
-    this.params.education.rankings = userInfo.education.rankings;
+  mounted () {
+    let userInfo = JSON.parse(localStorage.getItem('user'))
+    this.params.introduction.fullName = userInfo.user.fullName
+    this.params.introduction.birthday = userInfo.birthday
+    this.params.introduction.phonenumber = userInfo.phone_number
+    this.params.introduction.email = userInfo.user.emailAddress
+    this.params.introduction.address = userInfo.address
+    // education
+    this.params.education.graduationPlace = userInfo.education.graduationPlace
+    this.params.education.name = userInfo.education.name
+    this.params.education.rankings = userInfo.education.rankings
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -165,6 +165,5 @@ export default {
   margin-top: 16px;
   height: 160px;
   width: 120px;
-  /* border-radius: 50%; */
 }
 </style>
