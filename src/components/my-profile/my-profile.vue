@@ -54,7 +54,7 @@ export default {
   font-weight: 700;
   white-space: nowrap;
   color: #4a4a4a;
-  background: #f8f8f8;
+  background-color: #f8f8f8;
   border-bottom: 1px solid #d8d8d8;
 }
 .slide a:active {
@@ -68,5 +68,9 @@ export default {
   display: flex;
   flex: 1;
   padding-left: 80px;
+}
+.router-link-active{
+     background-color: white !important;
+    color: #096dd9 !important;
 }
 </style>

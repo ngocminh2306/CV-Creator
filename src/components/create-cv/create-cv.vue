@@ -76,9 +76,6 @@ export default {
       type: "default/default-cv",
       params: {
         title: "Title from 6 to 260 characters",
-        introduction: {
-          name: "MINH"
-        }
       },
       swiperOption: {
         slidesPerView: 6,
@@ -102,8 +99,9 @@ export default {
       this.keyTemplate++;
     },
     createPDF() {
-      html2canvas(this.$refs["cv"], { width: 800, height: 1200 }).then(
+      html2canvas(this.$refs["cv"], { width: 900, height: 1600 }).then(
         canvas => {
+          console.log(canvas);
           let pdf = new jsPDF("p", "mm", "a4");
           pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, 211, 298);
           pdf.save(this.params.title + ".pdf");
@@ -133,7 +131,7 @@ export default {
 }
 .create-cvform {
   margin: 44px auto;
-  width: 80%;
+  max-width: 1200px;
   padding: 44px;
 }
 .create-cv-btn {

@@ -3,10 +3,15 @@
     <div class="header__main_content">
       <ul>
         <li>
-          <a
+          <!-- <a
             href="#/"
             style="line-height: 38px; width: 80px;
             background-image: url('https://as2.ftcdn.net/jpg/02/43/20/43/500_F_243204369_umiTVo6ntOITf6TwV4WbU8Zai2uGtmqe.jpg'"
+          >&nbsp;</a>-->
+          <a
+            href="#/"
+            style="line-height: 38px; width: 80px;
+            background-image: url('@/assets/logo2.png'"
           >&nbsp;</a>
         </li>
         <li>
@@ -25,8 +30,7 @@
               <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-content">
-              <a href="#">Link 1</a>
-              <a href="#">Link 2</a>
+              <a href="#/my-profile">My Profile</a>
               <a @click="logout()">Đăng xuất</a>
             </div>
           </div>
@@ -41,12 +45,13 @@
         <div slot="body" class="form-group">
           <div class="username">
             <label for="exampleInputEmail1">User</label>
-            <input class="form-control" v-model="user">
+            <input required class="form-control" v-model="user">
           </div>
           <div class="password">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" v-model="password" type="password">
+            <input required class="form-control" v-model="password" type="password">
           </div>
+          <div style="color:red">{{messenger}}</div>
         </div>
         <div slot="footer">
           <button @click="openRegister()" type="button">Register</button>
@@ -56,7 +61,7 @@
             @click="closeLogin()"
             aria-label="Close modal"
           >Cancel</button>
-          <button type="button" class="btn-green" @click="login()" aria-label="Login">Login</button>
+          <button type="submit" class="btn-green" @click="login()" aria-label="Login">Login</button>
         </div>
       </modal>
       <!--End Login Modal -->
@@ -66,16 +71,22 @@
         <div slot="body" class="form-group">
           <div class="username">
             <label for="exampleInputEmail1">User</label>
-            <input class="form-control" v-model="user">
+            <input class="form-control" required v-model="register.user">
           </div>
           <div class="password">
             <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" v-model="password" type="password">
+            <input class="form-control" required v-model="register.password" type="password">
           </div>
           <div class="password">
             <label for="exampleInputPassword1">Confirm password</label>
-            <input class="form-control" type="password">
+            <input
+              class="form-control"
+              v-model="register.confirm_password"
+              required
+              type="password"
+            >
           </div>
+          <div style="color:red">{{register_messenger}}</div>
         </div>
         <div slot="footer">
           <button
@@ -84,7 +95,12 @@
             @click="closeRegister()"
             aria-label="Close modal"
           >Cancel</button>
-          <button type="button" class="btn-green" @click="login()" aria-label="Register">Register</button>
+          <button
+            type="submit"
+            class="btn-green"
+            @click="registerMethod()"
+            aria-label="Register"
+          >Register</button>
         </div>
       </modal>
       <!--End Register Modal -->
@@ -101,12 +117,19 @@ export default {
   props: [],
   data() {
     return {
-      userInfo:{ fullName: ''},
+      messenger: "",
+      register_messenger: "",
+      userInfo: { fullName: "" },
       Authenticated: false,
       isOpenLogin: false,
       isOpenRegister: false,
       user: "",
-      password: ""
+      password: "",
+      register: {
+        user: "",
+        password: "",
+        confirm_password: ""
+      }
     };
   },
   methods: {
@@ -125,27 +148,66 @@ export default {
     openLogin() {
       this.isOpenLogin = true;
     },
-    logout(){
-      localStorage.removeItem("token")
+    logout() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
       this.$emit("reset");
+    },
+    registerMethod() {
+      if (
+        this.register.user &&
+        this.register.password &&
+        this.register.confirm_password
+      ) {
+        if (this.register.password === this.register.confirm_password) {
+          console.log(this.register.user);
+          console.log(this.register.password);
+          // HTTP.post(`/TokenAuth/Authenticate`, {
+          //   userNameOrEmailAddress: this.user,
+          //   password: this.password
+          // })
+          //   .then(response => {
+          //     console.log(response);
+          //   })
+          //   .catch(error => {
+          //     this.messenger = error.response.data.error.details;
+          //   });
+        } else {
+          this.register_messenger =
+            "Mật khẩu và xác nhận mật khẩu phải trùng khớp.";
+        }
+      } else {
+        this.register_messenger =
+          "Tài khoản hoặc mật khẩu, xác nhận mật khẩu không được để trống.";
+      }
     },
     login() {
       if (this.user && this.password) {
         this.isModalVisible = false;
         HTTP.post(`/TokenAuth/Authenticate`, {
           userNameOrEmailAddress: this.user,
-          password: this.password }).then(response => {
+          password: this.password
+        })
+          .then(response => {
             console.log(response);
             localStorage.setItem("token", response.data.result.accessToken);
             this.isOpenLogin = false;
             this.$emit("reset");
             HTTP.get(`/UserInfo/Get`, {
-            headers: { Authorization: 'Bearer ' + localStorage.getItem("token") }}).then(res =>{
-              localStorage.setItem("user",JSON.stringify(res.data.result))
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+              }
+            }).then(res => {
+              localStorage.setItem("user", JSON.stringify(res.data.result));
               this.userInfo.fullName = res.data.result.user.fullName;
               console.log(res);
-            })
-          }).catch(e => {});
+            });
+          })
+          .catch(error => {
+            this.messenger = error.response.data.error.details;
+          });
+      } else {
+        this.messenger = "Tài khoản hoặc mật khẩu không để trống.";
       }
     },
     checkAuthenticate() {
@@ -154,7 +216,6 @@ export default {
         this.Authenticated = false;
         var user = JSON.parse(localStorage.getItem("user"));
         this.userInfo.fullName = user.user.fullName;
-
       } else {
         this.isOpenLogin = true;
         this.Authenticated = true;

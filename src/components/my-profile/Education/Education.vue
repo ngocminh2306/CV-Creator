@@ -76,7 +76,7 @@ export default {
       },
       myEducation: [
         {
-           school: "Thang Long",
+          school: "Thang Long",
           fromDate: "7-2012",
           toDate: "7-2016",
           studyProcess: "Hoc sinh yeu kem"
@@ -88,13 +88,18 @@ export default {
           studyProcess: "Hoc sinh yeu kem"
         },
         {
-           school: "Thang Long",
+          school: "Thang Long",
           fromDate: "7-2012",
           toDate: "7-2016",
           studyProcess: "Hoc sinh yeu kem"
         }
       ]
     };
+  },
+  mounted() {
+    let userInfo = JSON.parse(localStorage.getItem('user'));
+    this.education.school = userInfo.education.graduationPlace;
+    this.education.studyProcess = userInfo.education.name;
   }
 };
 </script>

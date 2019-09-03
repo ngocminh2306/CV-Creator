@@ -105,7 +105,16 @@ export default {
       );
     }
   },
-  computed: {}
+  computed: {},
+  mounted() {
+    let userInfo = JSON.parse(localStorage.getItem('user'));
+    this.infomation.fullName = userInfo.user.fullName;
+    this.infomation.dateOfBirth = userInfo.birthday;
+    this.infomation.phone = userInfo.phone_number;
+    this.infomation.email = userInfo.user.emailAddress;
+    this.infomation.address = userInfo.address;
+    this.infomation.job = userInfo.job_title;
+  }
 };
 </script>
 
