@@ -15,6 +15,9 @@
           >&nbsp;</a>
         </li>
         <li>
+          <a href="#">Mini Tools</a>
+        </li>
+        <li>
           <a href="#/">My CV</a>
         </li>
         <li>
@@ -193,7 +196,7 @@ export default {
             localStorage.setItem("token", response.data.result.accessToken);
             this.isOpenLogin = false;
             this.$emit("reset");
-            HTTP.get(`/UserInfo/Get`, {
+            HTTP.get(`/User/user`, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
               }
