@@ -92,7 +92,7 @@ export default {
     commitInfomation: function(data) {
       if (this.isComplete()) {
         const parsed = JSON.stringify(this.infomation);
-        localStorage.setItem('infomation', parsed);
+        localStorage.setItem("infomation", parsed);
       }
     },
     isComplete() {
@@ -107,13 +107,15 @@ export default {
   },
   computed: {},
   mounted() {
-    let userInfo = JSON.parse(localStorage.getItem('user'));
-    this.infomation.fullName = userInfo.fullName;
-    this.infomation.dateOfBirth = userInfo.birthday;
-    this.infomation.phone = userInfo.phone_number;
-    this.infomation.email = userInfo.user.emailAddress;
-    this.infomation.address = userInfo.address;
-    this.infomation.job = userInfo.job_title;
+    let userInfo = JSON.parse(localStorage.getItem("user"));
+    if (userInfo) {
+      this.infomation.fullName = userInfo.fullName;
+      this.infomation.dateOfBirth = userInfo.birthday;
+      this.infomation.phone = userInfo.phone_number;
+      this.infomation.email = userInfo.emailAddress;
+      this.infomation.address = userInfo.address;
+      this.infomation.job = userInfo.job_title;
+    }
   }
 };
 </script>

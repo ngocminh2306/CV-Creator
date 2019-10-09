@@ -71,7 +71,7 @@ export default {
     }
   },
   mounted() {
-    HTTP.get(`/services/app/CVTemplateService/GetTemplates`, {
+    this.$http.get(`/CVTemplate/GetTemplates`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("token")
       }

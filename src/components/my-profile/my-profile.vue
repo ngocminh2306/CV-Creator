@@ -24,7 +24,22 @@ export default {
   components: {},
   name: "my-profile",
   data() {
-    return {};
+    return {
+      userInfo: {
+        fullName: ''
+      }
+    };
+  },
+  mounted () {
+    this.$http.get(`/User/user`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token")
+          }
+        }).then(res => {
+          localStorage.setItem("user", JSON.stringify(res.data.result));
+          this.userInfo.fullName = res.data.result.fullName;
+          console.log(res);
+        });
   },
   created() {}
 };

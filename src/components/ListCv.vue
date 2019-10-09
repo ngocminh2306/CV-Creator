@@ -49,7 +49,7 @@ export default {
     return {};
   },
   mounted() {
-    HTTP.get(`/UserInfo/Get`, {
+    this.$http.get(`/User/user`, {
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     }).then(res => {
       // localStorage.setItem("user",JSON.stringify(res.data.result))
