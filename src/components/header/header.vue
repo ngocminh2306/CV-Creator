@@ -187,7 +187,7 @@ export default {
     login() {
       if (this.user && this.password) {
         this.isModalVisible = false;
-        HTTP.post(`/TokenAuth/Authenticate`, {
+        this.$http.post(`/TokenAuth/Authenticate`, {
           userNameOrEmailAddress: this.user,
           password: this.password
         })
@@ -196,13 +196,13 @@ export default {
             localStorage.setItem("token", response.data.result.accessToken);
             this.isOpenLogin = false;
             this.$emit("reset");
-            HTTP.get(`/User/user`, {
+            this.$http.get(`/User/user`, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
               }
             }).then(res => {
               localStorage.setItem("user", JSON.stringify(res.data.result));
-              this.userInfo.fullName = res.data.result.user.fullName;
+              this.userInfo.fullName = res.result.fullName;
               console.log(res);
             });
           })
@@ -218,12 +218,12 @@ export default {
         this.isOpenLogin = false;
         this.Authenticated = false;
         var user = JSON.parse(localStorage.getItem("user"));
-        this.userInfo.fullName = user.user.fullName;
+        this.userInfo.fullName = user.fullName;
       } else {
         this.isOpenLogin = true;
         this.Authenticated = true;
         var user = JSON.parse(localStorage.getItem("user"));
-        this.userInfo.fullName = user.user.fullName;
+        this.userInfo.fullName = user.fullName;
       }
     }
   },

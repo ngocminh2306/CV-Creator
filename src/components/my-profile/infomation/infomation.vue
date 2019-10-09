@@ -108,7 +108,7 @@ export default {
   computed: {},
   mounted() {
     let userInfo = JSON.parse(localStorage.getItem('user'));
-    this.infomation.fullName = userInfo.user.fullName;
+    this.infomation.fullName = userInfo.fullName;
     this.infomation.dateOfBirth = userInfo.birthday;
     this.infomation.phone = userInfo.phone_number;
     this.infomation.email = userInfo.user.emailAddress;

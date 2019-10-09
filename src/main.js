@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import VueQuillEditor from 'vue-quill-editor'
 import VueRx from 'vue-rx'
+import axios from 'axios'
 //
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import html2canvas from 'html2canvas'
@@ -22,6 +23,14 @@ Vue.use(VueQuillEditor)
 // Vue.use(html2canvas)
 Vue.config.productionTip = false
 
+const base = axios.create({
+  baseURL: 'https://www.truesales.vn/api',
+  headers: {
+    Authorization: 'Bearer ' + localStorage.getItem('token')
+  }
+})
+
+Vue.prototype.$http = base
 
 /* eslint-disable no-new */
 new Vue({
