@@ -24,8 +24,8 @@ Vue.use(VueQuillEditor)
 Vue.config.productionTip = false
 
 const base = axios.create({
-  // baseURL: 'https://www.truesales.vn/api',
-  baseURL: 'http://localhost:8089/api',
+  baseURL: 'https://www.truesales.vn/api',
+  // baseURL: 'http://localhost:8089/api',
   headers: {
     Authorization: 'Bearer ' + localStorage.getItem('token')
   }

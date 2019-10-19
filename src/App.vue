@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <img src="./assets/logo.png"> -->
     <div class="body-wrapper">
       <div class="content-wrapper">
         <HeaderMain :key="header_key" @reset="reloadHeader()"></HeaderMain>
@@ -27,7 +26,6 @@ export default {
   methods: {
     reloadHeader(){
       this.header_key += 1;
-      console.log(this.header_key);
     }
   }
 };

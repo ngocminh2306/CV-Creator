@@ -1,6 +1,9 @@
 <template>
   <div class="content-list-cv">
-    <div class="content">
+    <div v-if="!logined" class="content">
+      <h2>Bạn chưa đăng nhập.</h2>
+    </div>
+    <div v-if="logined" class="content">
       <div class="title-list-cv">
         <label>List CV</label>
         <a class="btn-add-new" type="button" href="#/create-cv">Add new</a>
@@ -46,7 +49,9 @@ export default {
   components: {},
   name: "ListCv",
   data() {
-    return {};
+    return {
+      logined: false
+    };
   },
   mounted() {
     this.$http.get(`/User/user`, {
@@ -54,6 +59,7 @@ export default {
     }).then(res => {
       // localStorage.setItem("user",JSON.stringify(res.data.result))
       console.log(res);
+      this.logined = true;
     });
   }
 };

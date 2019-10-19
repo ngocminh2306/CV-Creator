@@ -163,18 +163,6 @@ export default {
         this.register.confirm_password
       ) {
         if (this.register.password === this.register.confirm_password) {
-          console.log(this.register.user);
-          console.log(this.register.password);
-          // HTTP.post(`/TokenAuth/Authenticate`, {
-          //   userNameOrEmailAddress: this.user,
-          //   password: this.password
-          // })
-          //   .then(response => {
-          //     console.log(response);
-          //   })
-          //   .catch(error => {
-          //     this.messenger = error.response.data.error.details;
-          //   });
         } else {
           this.register_messenger =
             "Mật khẩu và xác nhận mật khẩu phải trùng khớp.";
@@ -192,18 +180,16 @@ export default {
           password: this.password
         })
           .then(response => {
-            console.log(response);
             localStorage.setItem("token", response.data.result.accessToken);
-            this.isOpenLogin = false;
-            this.$emit("reset");
             this.$http.get(`/User/user`, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
               }
             }).then(res => {
               localStorage.setItem("user", JSON.stringify(res.data.result));
-              this.userInfo.fullName = res.result.fullName;
-              console.log(res);
+              this.userInfo.fullName = res.data.fullName;
+              this.isOpenLogin = false;
+              this.$emit("reset");
             });
           })
           .catch(error => {
@@ -217,13 +203,13 @@ export default {
       if (localStorage.getItem("token")) {
         this.isOpenLogin = false;
         this.Authenticated = false;
+        var r = localStorage.getItem("user");
         var user = JSON.parse(localStorage.getItem("user"));
         this.userInfo.fullName = user.fullName;
+        debugger
       } else {
         this.isOpenLogin = true;
         this.Authenticated = true;
-        var user = JSON.parse(localStorage.getItem("user"));
-        this.userInfo.fullName = user.fullName;
       }
     }
   },
