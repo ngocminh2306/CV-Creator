@@ -57,7 +57,7 @@
           <div style="color:red">{{messenger}}</div>
         </div>
         <div slot="footer">
-          <button @click="openRegister()" type="button">Register</button>
+          <button @click="openRegister()" class="btn-light" type="button">Register</button>
           <button
             type="button"
             class="btn-light"
@@ -206,7 +206,6 @@ export default {
         var r = localStorage.getItem("user");
         var user = JSON.parse(localStorage.getItem("user"));
         this.userInfo.fullName = user.fullName;
-        debugger
       } else {
         this.isOpenLogin = true;
         this.Authenticated = true;
