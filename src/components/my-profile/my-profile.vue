@@ -20,6 +20,7 @@
 
 <script>
 import Vue from "vue";
+import { reject } from 'q';
 export default {
   components: {},
   name: "my-profile",
@@ -38,7 +39,8 @@ export default {
         }).then(res => {
           localStorage.setItem("user", JSON.stringify(res.data.result));
           this.userInfo.fullName = res.data.result.fullName;
-          console.log(res);
+        }).catch (e=> {
+          reject();
         });
   },
   created() {}

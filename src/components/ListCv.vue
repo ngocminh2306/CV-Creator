@@ -165,8 +165,6 @@ export default {
   flex: 1;
   text-align: left;
 }
-.item-title .edit-time {
-}
 h1,
 h2 {
   font-weight: normal;
