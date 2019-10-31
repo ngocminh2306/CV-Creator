@@ -2,7 +2,7 @@
   <div class="content-my-profile">
     <div class="content">
       <div class="slide">
-        <router-link to="/mini-tools/salary-calculate">Tính lương Gross sang Net</router-link>
+        <router-link class="router-link-exact-active router-link-active" to="/mini-tools/salary-calculate">Tính lương Gross sang Net</router-link>
       </div>
       <div class="main">
         <router-view/>
