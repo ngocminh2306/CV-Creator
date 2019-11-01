@@ -37,17 +37,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .body-wrapper {
   display: flex;
   flex-direction: column;
   overflow: auto;
   height: 100vh;
+  background-color: #f0f2f5;
 }
 .content-wrapper {
-  background-color: #f0f2f5;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

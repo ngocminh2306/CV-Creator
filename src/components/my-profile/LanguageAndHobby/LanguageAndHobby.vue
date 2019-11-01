@@ -1,8 +1,8 @@
 <template>
   <div class="">
     <div class="">
-      <h1>This is LanguageAndHobby component</h1>
-      <h1>This is LanguageAndHobby component</h1>
+      <h1>This is Language And Hobby</h1>
+      <h1>This is Language And Hobby</h1>
     </div>
   </div>
 </template>

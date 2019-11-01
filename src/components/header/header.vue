@@ -5,8 +5,8 @@
         <li>
           <a
             href="#/"
-            style="line-height: 38px; width: 80px;
-            background-image: url('@/assets/logo2.png'"
+            style="line-height: 38px; width: 50px;
+            background-image: url('https://www.truesales.vn/uploads/cv88-logo2.png'; background-repeat: no-repeat; background-size: contain;"
           >&nbsp;</a>
         </li>
         <li>
@@ -30,7 +30,7 @@
             <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>
           </b-dropdown>
         </li>
-        <li v-if="Authenticated" style="float: right;"> <b-button v-b-modal.modal-prevent-closing>Đăng nhập</b-button></li>
+        <li v-if="Authenticated" style="float: right; margin-bottom: 1vh;"> <b-button v-b-modal.modal-prevent-closing>Đăng nhập</b-button></li>
       </ul>
       <!-- Login Modal -->
       <b-modal id="modal-prevent-closing" ref="modalLogin" title="Đăng nhập" @show="resetModal" @hidden="resetModal" @ok="handleOk">
@@ -69,10 +69,9 @@
 </template>
 
 <script>
-import modal from "@/components/modal/modal";
 import { HTTP } from "../../http-common";
 export default {
-  components: { modal },
+  components: { },
   name: "HeaderMain",
   props: [],
   data() {
@@ -184,14 +183,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .header__main_content {
-  height: 64px;
   padding: 0 10%;
+}
+@media only screen and (max-width: 768px) {
+  .header__main_content {
+    padding: 0 !important;
+  }
+  li {
+    padding: 0 2vw !important;
+  }
 }
 .header__main {
   background: #2a2b50;
   display: block;
-  z-index: 100;
-  position: fixed;
   width: 100%;
   top: 0px;
 }
@@ -204,7 +208,7 @@ ul {
   margin: 0px;
   list-style-type: none;
   padding: 0;
-  line-height: 64px;
+  line-height: 6vh;
 }
 li {
   display: inline-block;
@@ -215,5 +219,8 @@ a {
   display: block;
   color: white;
   cursor: pointer;
+}
+a:hover {
+  color:#007bff
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="" style="text-align: left;">
+  <div class="salary-calculate-content" style="text-align: left;">
     <div class="">
       <h1>Tính lương Gross sang Net / Net sang Gross chuẩn 2019</h1>
       <i>Áp dụng mức lương cơ sở mới nhất 1,490,000 có hiệu lực từ 1/7/2019 (Theo điều 3, nghị định 38/2019/NĐ-CP)</i>
@@ -81,7 +81,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.self-center {
-  align-self: center;
-}
+  .salary-calculate-content {
+    
+  }
+  .self-center {
+    align-self: center;
+  }
 </style>
