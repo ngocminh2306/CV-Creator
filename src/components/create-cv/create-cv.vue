@@ -47,9 +47,13 @@ export default {
         slidesPerColumn: 1,
         spaceBetween: 20,
         pagination: {
-          type: "progressbar",
+          // type: "progressbar",
           el: ".swiper-pagination",
           clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
         }
       }
     };
