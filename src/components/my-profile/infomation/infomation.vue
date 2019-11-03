@@ -14,7 +14,7 @@
         <div class="label">
           <label>Job</label>
         </div>
-        <input v-model="infomation.job" placeholder="Job">
+        <input v-model="infomation.job_title" placeholder="Job">
       </div>
       <div class="input-content">
         <div class="label">
@@ -41,7 +41,7 @@
             <span class="required">*</span>
           </label>
         </div>
-        <input required v-model="infomation.phone" placeholder="Phone">
+        <input required v-model="infomation.phone_number" placeholder="Phone">
       </div>
       <div class="input-content">
         <div class="label">
@@ -78,10 +78,10 @@ export default {
     return {
       infomation: {
         fullName: "",
-        job: "",
+        job_title: "",
         dateOfBirth: "",
         email: "",
-        phone: "",
+        phone_number: "",
         address: "",
         github: "",
         facebook: ""
@@ -93,6 +93,10 @@ export default {
       if (this.isComplete()) {
         const parsed = JSON.stringify(this.infomation);
         localStorage.setItem("infomation", parsed);
+        this.$http.post(`/UserInfo/update`,data).then(response => {
+        }).catch(error => {
+
+        })
       }
     },
     isComplete() {
