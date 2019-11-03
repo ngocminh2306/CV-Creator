@@ -1,21 +1,23 @@
 <template>
-  <div class="content-list-cv">
-    <div class="content">
+  <div>
+    <div v-if="!logined" class="content">
+      <b-alert show variant="danger" >Bạn chưa đăng nhập.</b-alert>
+    </div>
+    <div v-if="logined" class="content">
       <div class="title-list-cv">
         <label>List CV</label>
         <a class="btn-add-new" type="button" href="#/create-cv">Add new</a>
       </div>
       <div class="resume-list">
         <div class="content-item">
-          <a href="#">
+          <a href="#" style="align-self: center;">
             <img
               src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png"
               alt
-              width="120px"
-              height="150px"
+              style="width: 20vw; height: 20vw; max-width: 120px; max-height: 120px;"
             >
           </a>
-          <div class="content-item-info">
+          <div class="content-item-info" col-8>
             <div class="item-title">
               <span class="router-title">
                 <a href="#">.NET CV</a>
@@ -46,14 +48,15 @@ export default {
   components: {},
   name: "ListCv",
   data() {
-    return {};
+    return {
+      logined: false
+    };
   },
   mounted() {
     this.$http.get(`/User/user`, {
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     }).then(res => {
-      // localStorage.setItem("user",JSON.stringify(res.data.result))
-      console.log(res);
+      this.logined = true;
     });
   }
 };
@@ -61,14 +64,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.content-list-cv {
-  flex: 3 auto;
-  display: block;
-}
 .content {
   display: block;
-  margin: 66px auto;
-  padding: 20px;
+  margin: 5vh auto;
   width: 75%;
 }
 .title-list-cv {
@@ -81,6 +79,22 @@ export default {
   flex: 1;
   font-size: 24px;
   font-weight: 900;
+}
+@media only screen and (max-width: 768px) {
+  .content {
+    display: block;
+    margin: 5vh auto;
+    width: 100%;
+  }
+  .content-item .item-action button {
+    background-color: transparent;
+    border: 1px solid gray;
+    border-radius: 4px;
+    padding: 0;
+    line-height: 28px;
+    margin: 0;
+    cursor: pointer;
+  }
 }
 .btn-add-new {
   text-decoration: none;
@@ -115,9 +129,6 @@ export default {
   padding: 15px;
 }
 .content-item .item-action {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
 }
 .content-item .item-action button {
   background-color: transparent;
@@ -158,8 +169,6 @@ export default {
 .item-title .router-title {
   flex: 1;
   text-align: left;
-}
-.item-title .edit-time {
 }
 h1,
 h2 {

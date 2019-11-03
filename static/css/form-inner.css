@@ -1,16 +1,16 @@
 /* infomation */
 .content-my-profile .content .main .label {
-    font-size: 15px;
+    /* font-size: 15px; */
     font-weight: 700;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
 }
 .content-my-profile .content .main .input-content input {
-    width: 100%;
+    /* width: 100%;
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 7px;
     height: 15px;
-    line-height: 20px;
+    line-height: 20px; */
 }
 .content-my-profile .content .input-content:not(:last-child) {
     margin-bottom: 30px;

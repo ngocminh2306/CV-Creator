@@ -86,11 +86,11 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .content-my-profile {
-  flex: 3 auto;
-  display: block;
+  /* flex: 3 auto;
+  display: block; */
 }
 .content-my-profile .content {
-  padding: 60px;
+  /* padding: 60px; */
 }
 .swiper-container {
   max-width: 60%;

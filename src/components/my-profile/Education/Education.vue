@@ -113,6 +113,7 @@ export default {
   width: 100%;
 }
 .education .input-content .input-row {
+  flex-flow: row wrap;
   display: flex;
 }
 .education .input-content .input-row .From {

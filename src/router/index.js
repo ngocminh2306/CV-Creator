@@ -11,6 +11,8 @@ import LanguageAndHobby from '@/components/my-profile/LanguageAndHobby/LanguageA
 import WorkingExperience from '@/components/my-profile/WorkingExperience/WorkingExperience'
 import WorkingSkill from '@/components/my-profile/WorkingSkill/WorkingSkill'
 import createCV from '@/components/create-cv/create-cv'
+import miniTools from '@/components/minitools/mini-tools'
+import SalaryCalculate from '@/components/minitools/salary-calculate/salary-calculate'
 
 Vue.use(Router)
 
@@ -75,5 +77,22 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/mini-tools',
+      name: 'mini-tools',
+      component: miniTools,
+      children: [
+        {
+          path: '/mini-tools/salary-calculate',
+          name: 'salary-calculate',
+          component: SalaryCalculate,
+        },
+        {
+          path: '/mini-tools',
+          name: 'salary-calculate',
+          component: SalaryCalculate,
+        }
+      ]
+    }
   ]
 })

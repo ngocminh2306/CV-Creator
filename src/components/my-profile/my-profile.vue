@@ -20,6 +20,7 @@
 
 <script>
 import Vue from "vue";
+import { reject } from 'q';
 export default {
   components: {},
   name: "my-profile",
@@ -38,7 +39,8 @@ export default {
         }).then(res => {
           localStorage.setItem("user", JSON.stringify(res.data.result));
           this.userInfo.fullName = res.data.result.fullName;
-          console.log(res);
+        }).catch (e=> {
+          reject();
         });
   },
   created() {}
@@ -50,24 +52,23 @@ export default {
   display: block;
 }
 .content-my-profile .content {
-  margin: 66px auto;
+  margin: 5vh 5vw;
   display: flex;
   flex-direction: row;
-  padding: 60px;
-  max-width: 1180px;
+  /* max-width: 90%; */
 }
 .slide {
   display: flex;
   flex-direction: column;
+  max-width: 30vw;
 }
 .slide a {
   display: block;
-  padding: 10px 30px;
+  padding: 1vh 1vw;
   line-height: 30px;
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 700;
-  white-space: nowrap;
+  font-size: 17px;
+  font-weight: 600;
   color: #4a4a4a;
   background-color: #f8f8f8;
   border-bottom: 1px solid #d8d8d8;
@@ -80,9 +81,8 @@ export default {
   background: #fff;
 }
 .main {
-  display: flex;
-  flex: 1;
-  padding-left: 80px;
+  width: calc(100% - 30vw);
+  padding-left: 5vw;
 }
 .router-link-active{
      background-color: white !important;

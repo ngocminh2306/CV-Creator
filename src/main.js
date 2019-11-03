@@ -15,17 +15,22 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 //
 import 'swiper/dist/css/swiper.css'
+//
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+import BootstrapVue from 'bootstrap-vue'
 Vue.use(VueRx)
 
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueQuillEditor)
 // Vue.use(html2canvas)
+Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
 const base = axios.create({
-  // baseURL: 'https://www.truesales.vn/api',
-  baseURL: 'http://localhost:8089/api',
+  baseURL: 'https://www.truesales.vn/api',
+  // baseURL: 'http://localhost:8089/api',
   headers: {
     Authorization: 'Bearer ' + localStorage.getItem('token')
   }

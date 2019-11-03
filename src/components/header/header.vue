@@ -3,19 +3,14 @@
     <div class="header__main_content">
       <ul>
         <li>
-          <!-- <a
-            href="#/"
-            style="line-height: 38px; width: 80px;
-            background-image: url('https://as2.ftcdn.net/jpg/02/43/20/43/500_F_243204369_umiTVo6ntOITf6TwV4WbU8Zai2uGtmqe.jpg'"
-          >&nbsp;</a>-->
           <a
             href="#/"
-            style="line-height: 38px; width: 80px;
-            background-image: url('@/assets/logo2.png'"
+            style="line-height: 38px; width: 50px;
+            background-image: url('https://www.truesales.vn/uploads/cv88-logo2.png'; background-repeat: no-repeat; background-size: contain;"
           >&nbsp;</a>
         </li>
         <li>
-          <a href="#">Mini Tools</a>
+          <a href="#/mini-tools">Mini Tools</a>
         </li>
         <li>
           <a href="#/">My CV</a>
@@ -27,95 +22,56 @@
           <a href="#/create-cv">Create CV</a>
         </li>
         <li v-if="!Authenticated" style="float: right;">
-          <div class="dropdown">
-            <button class="dropbtn">
-              Xin chào ({{userInfo.fullName}})
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <a href="#/my-profile">My Profile</a>
-              <a @click="logout()">Đăng xuất</a>
-            </div>
-          </div>
+          <b-dropdown class="m-2">
+            <template v-slot:button-content>
+               Xin chào ({{userInfo.fullName}})
+            </template>
+            <b-dropdown-item href="#/my-profile">My Profile</b-dropdown-item>
+            <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>
+          </b-dropdown>
         </li>
-        <li v-if="Authenticated" style="float: right;">
-          <a @click="openLogin()">Login</a>
-        </li>
+        <li v-if="Authenticated" style="float: right; margin-bottom: 1vh;"> <b-button v-b-modal.modal-prevent-closing>Đăng nhập</b-button></li>
       </ul>
       <!-- Login Modal -->
-      <modal v-show="isOpenLogin" @close="closeLogin">
-        <div slot="header">Login</div>
-        <div slot="body" class="form-group">
-          <div class="username">
-            <label for="exampleInputEmail1">User</label>
-            <input required class="form-control" v-model="user">
-          </div>
-          <div class="password">
-            <label for="exampleInputPassword1">Password</label>
-            <input required class="form-control" v-model="password" type="password">
-          </div>
-          <div style="color:red">{{messenger}}</div>
-        </div>
-        <div slot="footer">
-          <button @click="openRegister()" type="button">Register</button>
-          <button
-            type="button"
-            class="btn-light"
-            @click="closeLogin()"
-            aria-label="Close modal"
-          >Cancel</button>
-          <button type="submit" class="btn-green" @click="login()" aria-label="Login">Login</button>
-        </div>
-      </modal>
+      <b-modal id="modal-prevent-closing" ref="modalLogin" title="Đăng nhập" @show="resetModal" @hidden="resetModal" @ok="handleOk">
+        <template v-slot:modal-ok> Đăng nhập</template>
+        <form ref="formLogin" @submit.stop.prevent="handleSubmit">
+          <b-form-group :state="nameState" label="Tài khoản hoặc email" label-for="user-input" invalid-feedback="Name is required">
+            <b-form-input id="user-input" v-model="user" :state="nameState" required ></b-form-input>
+          </b-form-group>
+          <b-form-group :state="nameState" label="Mật khẩu" label-for="pass-input" invalid-feedback="Password is required"> 
+            <b-form-input type="password" id="pass-input" v-model="password" :state="nameState" required ></b-form-input>
+          </b-form-group>
+        </form>
+        <b-button size="sm" variant="outline-secondary" v-b-modal.modal-prevent-closing2>
+          Đăng ký
+        </b-button>
+      </b-modal>
       <!--End Login Modal -->
+
       <!-- Register Modal -->
-      <modal v-show="isOpenRegister" @close="closeRegister">
-        <div slot="header">Register</div>
-        <div slot="body" class="form-group">
-          <div class="username">
-            <label for="exampleInputEmail1">User</label>
-            <input class="form-control" required v-model="register.user">
-          </div>
-          <div class="password">
-            <label for="exampleInputPassword1">Password</label>
-            <input class="form-control" required v-model="register.password" type="password">
-          </div>
-          <div class="password">
-            <label for="exampleInputPassword1">Confirm password</label>
-            <input
-              class="form-control"
-              v-model="register.confirm_password"
-              required
-              type="password"
-            >
-          </div>
-          <div style="color:red">{{register_messenger}}</div>
-        </div>
-        <div slot="footer">
-          <button
-            type="button"
-            class="btn-light"
-            @click="closeRegister()"
-            aria-label="Close modal"
-          >Cancel</button>
-          <button
-            type="submit"
-            class="btn-green"
-            @click="registerMethod()"
-            aria-label="Register"
-          >Register</button>
-        </div>
-      </modal>
-      <!--End Register Modal -->
+      <b-modal id="modal-prevent-closing2" ref="modalRegister" title="Đăng ký" @show="resetModal" @hidden="resetModal" @ok="registerMethod">
+        <template v-slot:modal-ok> Đăng ký</template>
+        <form ref="formLogin" @submit.stop.prevent="handleSubmit">
+          <b-form-group :state="nameState" label="Tài khoản hoặc email" label-for="user-input" invalid-feedback="Name is required">
+            <b-form-input id="user-input" v-model="register.user" :state="nameState" required ></b-form-input>
+          </b-form-group>
+          <b-form-group :state="nameState" label="Mật khẩu" label-for="pass-input" invalid-feedback="Password is required"> 
+            <b-form-input type="password" id="pass-input" v-model="register.password" :state="nameState" required ></b-form-input>
+          </b-form-group>
+          <b-form-group :state="nameState" label="Xác nhận lại mật khẩu" label-for="pass-input" invalid-feedback="Confirm password is required"> 
+            <b-form-input type="password" id="pass-input" v-model="register.confirm_password" :state="nameState" required ></b-form-input>
+          </b-form-group>
+        </form>
+      </b-modal>
     </div>
   </div>
 </template>
 
 <script>
-import modal from "@/components/modal/modal";
 import { HTTP } from "../../http-common";
 export default {
-  components: { modal },
+  components: { },
   name: "HeaderMain",
   props: [],
   data() {
@@ -124,33 +80,40 @@ export default {
       register_messenger: "",
       userInfo: { fullName: "" },
       Authenticated: false,
-      isOpenLogin: false,
-      isOpenRegister: false,
       user: "",
       password: "",
       register: {
         user: "",
         password: "",
         confirm_password: ""
-      }
+      },
+      nameState: null
     };
   },
   methods: {
-    showModal() {
-      this.isModalVisible = true;
-    },
-    closeLogin() {
-      this.isOpenLogin = false;
-    },
-    closeRegister() {
-      this.isOpenRegister = false;
-    },
-    openRegister() {
-      this.isOpenRegister = true;
-    },
-    openLogin() {
-      this.isOpenLogin = true;
-    },
+    checkFormValidity() {
+        const valid = this.$refs.formLogin.checkValidity()
+        this.nameState = valid ? true : false
+        return valid
+      },
+      resetModal() {
+        this.name = ''
+        this.nameState = null
+      },
+      handleOk(bvModalEvt) {
+        // Prevent modal from closing
+        bvModalEvt.preventDefault()
+        // Trigger submit handler
+        this.handleSubmit()
+      },
+      handleSubmit() {
+        // Exit when the form isn't valid
+        if (!this.checkFormValidity()) {
+          return
+        }
+        // Push the name to submitted names
+        this.login()
+      },
     logout() {
       localStorage.removeItem("token");
       localStorage.removeItem("user");
@@ -163,25 +126,11 @@ export default {
         this.register.confirm_password
       ) {
         if (this.register.password === this.register.confirm_password) {
-          console.log(this.register.user);
-          console.log(this.register.password);
-          // HTTP.post(`/TokenAuth/Authenticate`, {
-          //   userNameOrEmailAddress: this.user,
-          //   password: this.password
-          // })
-          //   .then(response => {
-          //     console.log(response);
-          //   })
-          //   .catch(error => {
-          //     this.messenger = error.response.data.error.details;
-          //   });
         } else {
-          this.register_messenger =
-            "Mật khẩu và xác nhận mật khẩu phải trùng khớp.";
+          this.register_messenger = "Mật khẩu và xác nhận mật khẩu phải trùng khớp.";
         }
       } else {
-        this.register_messenger =
-          "Tài khoản hoặc mật khẩu, xác nhận mật khẩu không được để trống.";
+        this.register_messenger = "Tài khoản hoặc mật khẩu, xác nhận mật khẩu không được để trống.";
       }
     },
     login() {
@@ -192,18 +141,19 @@ export default {
           password: this.password
         })
           .then(response => {
-            console.log(response);
             localStorage.setItem("token", response.data.result.accessToken);
-            this.isOpenLogin = false;
-            this.$emit("reset");
             this.$http.get(`/User/user`, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
               }
             }).then(res => {
               localStorage.setItem("user", JSON.stringify(res.data.result));
-              this.userInfo.fullName = res.result.fullName;
-              console.log(res);
+              this.userInfo.fullName = res.data.fullName;
+              // Hide the modal manually
+              this.$nextTick(() => {
+                this.$refs.modalLogin.hide()
+              })
+              this.$emit("reset");
             });
           })
           .catch(error => {
@@ -215,15 +165,12 @@ export default {
     },
     checkAuthenticate() {
       if (localStorage.getItem("token")) {
-        this.isOpenLogin = false;
         this.Authenticated = false;
+        var r = localStorage.getItem("user");
         var user = JSON.parse(localStorage.getItem("user"));
         this.userInfo.fullName = user.fullName;
       } else {
-        this.isOpenLogin = true;
         this.Authenticated = true;
-        var user = JSON.parse(localStorage.getItem("user"));
-        this.userInfo.fullName = user.fullName;
       }
     }
   },
@@ -236,14 +183,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .header__main_content {
-  height: 64px;
   padding: 0 10%;
+}
+@media only screen and (max-width: 768px) {
+  .header__main_content {
+    padding: 0 !important;
+  }
+  li {
+    padding: 0 2vw !important;
+  }
 }
 .header__main {
   background: #2a2b50;
   display: block;
-  z-index: 100;
-  position: fixed;
   width: 100%;
   top: 0px;
 }
@@ -256,7 +208,7 @@ ul {
   margin: 0px;
   list-style-type: none;
   padding: 0;
-  line-height: 64px;
+  line-height: 6vh;
 }
 li {
   display: inline-block;
@@ -268,132 +220,7 @@ a {
   color: white;
   cursor: pointer;
 }
-.dropdown .dropbtn {
-  font-size: 17px;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-.dropdown-content {
-  border-radius: 4px;
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 120px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown-content a {
-  float: none;
-  color: black;
-  /* padding: 12px 16px; */
-  text-decoration: none;
-  display: block;
-  text-align: center;
-}
-.dropdown:hover .dropbtn {
-  background-color: rgba(85, 85, 85, 0.5);
-  color: white;
-}
-.dropdown-content a:hover {
-  background-color: #ddd;
-  color: black;
-}
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-.dropdown {
-  float: none;
-}
-.dropdown .dropbtn {
-  /* display: block; */
-  width: 100%;
-  text-align: left;
-}
-.icon-header {
-  width: 66px;
-  height: 14px;
-}
-.form-control {
-  display: block;
-  width: 100%;
-  padding: 0.375rem 0.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-.btn-green {
-  color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  overflow: visible;
-}
-.btn-light {
-  color: #ffff;
-  background-color: #ced4da;
-  border-color: #ced4da;
-  display: inline-block;
-  margin-bottom: 0;
-  font-weight: 400;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: middle;
-  -ms-touch-action: manipulation;
-  touch-action: manipulation;
-  cursor: pointer;
-  background-image: none;
-  border: 1px solid transparent;
-  padding: 6px 12px;
-  font-size: 14px;
-  line-height: 1.42857143;
-  border-radius: 4px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  overflow: visible;
-}
-.username {
-  align-items: center;
-  display: flex;
-}
-.username label {
-  width: 33%;
-}
-.password {
-  align-items: center;
-  display: flex;
-}
-.password label {
-  width: 33%;
+a:hover {
+  color:#007bff
 }
 </style>
