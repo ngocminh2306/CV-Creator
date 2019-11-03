@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import ListCv from '@/components/ListCv'
+import home from "@/components/home"
 import myProfile from '@/components/my-profile/my-profile'
 import infomation from '@/components/my-profile/infomation/infomation'
 import Education from '@/components/my-profile/Education/Education'
@@ -20,6 +21,11 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: home
+    },
+    {
+      path: '/my-cv',
       name: 'ListCv',
       component: ListCv
     },

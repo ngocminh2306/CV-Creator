@@ -13,7 +13,7 @@
           <a href="#/mini-tools">Mini Tools</a>
         </li>
         <li>
-          <a href="#/">My CV</a>
+          <a href="#/my-cv">My CV</a>
         </li>
         <li>
           <a href="#/my-profile">My Profile</a>
