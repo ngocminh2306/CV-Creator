@@ -3,7 +3,7 @@
     <swiper :options="swiperOption">
     <!-- slides -->
     <swiper-slide v-for="template in templates">
-        <img style="cursor: pointer;height:80vh;width:100vw" v-on:click="slideClick(template.path)" src="https://www.cvexpress.com/wp-content/uploads/2017/09/slide1-17v4.jpg">
+        <img style="cursor: pointer;height:80vh;width:100vw" src="https://www.cvexpress.com/wp-content/uploads/2017/09/slide1-17v4.jpg">
     </swiper-slide>
     <!-- Optional controls -->
     <div class="swiper-pagination" slot="pagination"></div>
@@ -26,11 +26,6 @@ export default {
         slidesPerView: 1,
         slidesPerColumn: 1,
         spaceBetween: 0,
-        // pagination: {
-        //   type: "progressbar",
-        //   el: ".swiper-pagination",
-        //   clickable: true
-        // }
       },
       logined: false
     };

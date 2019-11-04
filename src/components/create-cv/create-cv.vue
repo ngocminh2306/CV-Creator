@@ -8,12 +8,14 @@
           <span>{{template.title}}</span>
           <div style="color:red">Lượt xem: {{template.viewCount}}</div>
         </swiper-slide>
+        <div class="swiper-button-prev" slot="button-prev"></div>
+        <div class="swiper-button-next" slot="button-next"></div>
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
       <form class="create-cvform">
         <div class="title">
-          <label>Time</label>
+          <label>Title</label>
           <input placeholder="Title from 6 to 250 characters" v-model="params.title">
         </div>
         <div ref="cv" id="cv">
@@ -28,7 +30,6 @@
 </template>
 
 <script>
-import { HTTP } from "../../http-common";
 import cvtemplate from "@/components/templates/cvtemplate";
 import html2canvas from "html2canvas";
 export default {
@@ -43,14 +44,14 @@ export default {
       },
       templates: [],
       swiperOption: {
-        slidesPerView: 6,
+        slidesPerView: 5,
         slidesPerColumn: 1,
         spaceBetween: 20,
-        pagination: {
-          // type: "progressbar",
-          el: ".swiper-pagination",
-          clickable: true
-        },
+        // pagination: {
+        //   // type: "progressbar",
+        //   el: ".swiper-pagination",
+        //   clickable: true
+        // },
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -80,7 +81,7 @@ export default {
         Authorization: "Bearer " + localStorage.getItem("token")
       }
     }).then(res => {
-      console.log(res);
+      // console.log(res);
       this.templates = res.data.result.items;
     });
   }

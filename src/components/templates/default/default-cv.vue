@@ -2,7 +2,7 @@
   <div class="editor-container">
     <div class="introduction">
       <div class="introduction-left" style="display:block">
-        <img @click="img_click" ref="preview" src="@/assets/logo.png" class="avatar-img">
+        <img @click="img_click" ref="preview" src="@/assets/saitama.jpg" class="avatar-img">
         <input style="display: none" ref="input-img" type="file" @change="onFileSelected">
         <div style="text-align: left;"><i>Tên của bạn:</i></div>
         <quill-editor placeholder="name" v-model="params.introduction.fullName" :options="editorOption">
@@ -18,14 +18,14 @@
     <div class="career">
       <h1 style="text-align: left;">CAREER GOALS</h1>
       <div class="career-left">
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
       </div>
       <div class="career-right">
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
       </div>
     </div>
     <div class="education">
@@ -39,27 +39,27 @@
     <div class="career">
       <h1 style="text-align: left;">WORK EXPERIENCE</h1>
       <div class="introduction-left">
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
       </div>
       <div class="introduction-right">
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
       </div>
     </div>
     <div class="career">
       <h1 style="text-align: left;">LANGUAGES</h1>
       <div class="introduction-left">
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
       </div>
       <div class="introduction-right">
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
-        <quill-editor v-model="params.introduction.name" :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="editorOption"></quill-editor>
       </div>
     </div>
   </div>
@@ -101,7 +101,6 @@ export default {
       this.$refs["input-img"].click();
     },
     onFileSelected(event) {
-      console.log(event.target.value);
       var file = event.target.files[0];
       var reader = new FileReader();
       var preview = this.$refs["preview"];
@@ -128,9 +127,9 @@ export default {
       this.params.introduction.email = userInfo.emailAddress;
       this.params.introduction.address = userInfo.address;
       // education
-      this.params.education.graduationPlace =userInfo.graduationPlace;
-      this.params.education.name = userInfo.name;
-      this.params.education.rankings = userInfo.rankings;
+      // this.params.education.graduationPlace =userInfo.graduationPlace;
+      // this.params.education.name = userInfo.name;
+      // this.params.education.rankings = userInfo.rankings;
     }
   }
 };
@@ -139,7 +138,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .editor-container {
-  padding: 0 10rem;
+  padding: 0 5vw;
   background-color: white;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
 }
@@ -151,14 +150,13 @@ export default {
   border-bottom: 1px solid #bbb;
 }
 .education {
-  /* display: flex; */
   border-bottom: 1px solid #bbb;
 }
 .quill-editor:hover {
   background: #cdebf650;
   border: 1px dotted gainsboro;
 }
-.introduction .introduction-left {
+/* .introduction .introduction-left {
   justify-content: space-between;
   flex: 1;
   display: flex;
@@ -166,7 +164,7 @@ export default {
 }
 .introduction .introduction-right {
   flex: 1;
-}
+} */
 .avatar-img {
   margin-top: 16px;
   height: 160px;

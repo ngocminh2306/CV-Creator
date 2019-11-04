@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { HTTP } from "../http-common";
 export default {
   components: {},
   name: "ListCv",
