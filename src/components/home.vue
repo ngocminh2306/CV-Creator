@@ -1,17 +1,18 @@
 <template>
   <div>
     <swiper :options="swiperOption">
-    <!-- slides -->
-    <swiper-slide v-for="template in templates">
-        <img style="cursor: pointer;height:80vh;width:100vw" src="https://www.cvexpress.com/wp-content/uploads/2017/09/slide1-17v4.jpg">
-    </swiper-slide>
-    <!-- Optional controls -->
-    <div class="swiper-pagination" slot="pagination"></div>
+      <!-- slides -->
+      <swiper-slide v-for="template in templates">
+          <img style="height:95vh;width:100vw" src="@/assets/slide.jpg">
+      </swiper-slide>
+      <!-- Optional controls -->
+      <div class="swiper-pagination" slot="pagination"></div>
+      <span class="subtitle title">Tạo cv nhanh chóng với hàng chục mẫu cv miễn phí.</span>
+      <b-button class="button-get-now" variant="info" size="lg" href="#/create-cv">Tạo CV ngay</b-button>
     </swiper>
-    <div class="title">
-        <p class="subtitle">Tạo cv nhanh chóng với hàng chục mẫu cv miễn phí.</p>
-        <b-button variant="info" size="lg">Tạo CV ngay</b-button>
-    </div>
+    <!-- <div class="title"> -->
+        
+    <!-- </div> -->
   </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
   name: "home",
   data() {
     return {
-        templates: [1,2],
+        templates: [1,2,3,4],
         swiperOption: {
         slidesPerView: 1,
         slidesPerColumn: 1,
@@ -69,109 +70,24 @@ export default {
     cursor: pointer;
   }
 }
-.btn-add-new {
-  text-decoration: none;
-  max-width: 100px;
-  flex: auto;
-  color: #fff;
-  background-color: #0ba25e;
-  border-color: #0ba25e;
 
-  display: inline-block;
-  font-weight: 400;
-  text-align: center;
-  vertical-align: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  border: 1px solid transparent;
-  padding: 0.375rem 0.75rem;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  border-radius: 0.5rem;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-.content-item {
-  display: flex;
-  flex-direction: row;
-  margin: 15px 0;
-  border: 1px solid #d1d1d1;
-  border-radius: 10px;
-  padding: 15px;
-}
-.content-item .item-action {
-}
-.content-item .item-action button {
-  background-color: transparent;
-  border: 1px solid gray;
-  border-radius: 4px;
-  padding: 0px 15px;
-  line-height: 28px;
-  margin: 0px 10px;
-  cursor: pointer;
-}
-.item-action button.delete-action,
-.content-item .item-action button.delete-action:hover {
-  color: red;
-  border: 1px solid red;
-}
-.content-item .item-action button:hover {
-  color: #40a9ff;
-  background-color: #fff;
-  border-color: #40a9ff;
-}
-.content-item img {
-  border: 2px solid #d1d1d1;
-}
-.content-item .item {
-  border: 2px dashed silver;
-  padding: 10px;
-}
-.content-item-info {
-  flex: 1;
-  margin-left: 15px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.content-item-info .item-title {
-  display: flex;
-}
-.item-title .router-title {
-  flex: 1;
-  text-align: left;
-}
-h1,
-h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 .title {
     position: absolute;
     right: 15%;
     top: 10vw;
     left: 15%;
     z-index: 10;
-    padding-top: 20px;
-    padding-bottom: 20px;
     color: #fff;
     text-align: center;
 }
-
+.button-get-now {
+    position: absolute;
+    top: 14vw;
+    left: 45%;
+    z-index: 10;
+}
 .subtitle {
-    font-size: 7vh;
+    font-size: 5vh;
     font-weight: 500;
 }
 </style>

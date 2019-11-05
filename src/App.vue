@@ -3,8 +3,8 @@
     <div class="body-wrapper">
       <div class="content-wrapper">
         <HeaderMain :key="header_key" @reset="reloadHeader()"></HeaderMain>
-        <router-view/>
-        <!-- <FooterMain></FooterMain> -->
+        <router-view class="content-struct" />
+        <FooterMain class="footer-struct"></FooterMain>
       </div>
     </div>
   </div>
@@ -48,5 +48,12 @@ export default {
 .content-wrapper {
   display: flex;
   flex-direction: column;
+  min-height: 100%;
+}
+.content-struct {
+  flex: 1 0 auto;
+}
+.footer-struct {
+  flex-shrink: 0;
 }
 </style>

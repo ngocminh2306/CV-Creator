@@ -195,9 +195,7 @@ export default {
 }
 .header__main {
   background: #2a2b50;
-  display: block;
   width: 100%;
-  top: 0px;
 }
 h1,
 h2 {

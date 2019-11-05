@@ -4,7 +4,6 @@
       <div class="introduction-left" style="display:block">
         <img @click="img_click" ref="preview" src="@/assets/saitama.jpg" class="avatar-img">
         <input style="display: none" ref="input-img" type="file" @change="onFileSelected">
-        <div style="text-align: left;"><i>Tên của bạn:</i></div>
         <quill-editor placeholder="name" v-model="params.introduction.fullName" :options="editorOption">
         </quill-editor>
       </div>
@@ -16,7 +15,7 @@
       </div>
     </div>
     <div class="career">
-      <h1 style="text-align: left;">CAREER GOALS</h1>
+      <h2 style="text-align: left;">CAREER GOALS</h2>
       <div class="career-left">
         <quill-editor   :options="editorOption"></quill-editor>
       </div>
@@ -29,7 +28,7 @@
       </div>
     </div>
     <div class="education">
-      <h1 style="text-align: left;">EDUCATION</h1>
+      <h2 style="text-align: left;">EDUCATION</h2>
       <div class="introduction-right">
         <quill-editor v-model="params.education.graduationPlace" :options="editorOption"></quill-editor>
         <quill-editor v-model="params.education.rankings" :options="editorOption"></quill-editor>
@@ -37,7 +36,7 @@
       </div>
     </div>
     <div class="career">
-      <h1 style="text-align: left;">WORK EXPERIENCE</h1>
+      <h2 style="text-align: left;">WORK EXPERIENCE</h2>
       <div class="introduction-left">
         <quill-editor   :options="editorOption"></quill-editor>
       </div>
@@ -50,7 +49,7 @@
       </div>
     </div>
     <div class="career">
-      <h1 style="text-align: left;">LANGUAGES</h1>
+      <h2 style="text-align: left;">LANGUAGES</h2>
       <div class="introduction-left">
         <quill-editor   :options="editorOption"></quill-editor>
       </div>
@@ -73,9 +72,8 @@ export default {
       editorOption: {
         // some quill options
         theme: "bubble",
-        // placeholder: "",
         modules: {
-          toolbar: [[], []]
+          // toolbar: [[], []]
         }
       },
       params: {
@@ -137,37 +135,51 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+@media only screen and (max-width: 768px) {
+  .editor-container {
+    padding: 0 10px !important;
+    background-color: white;
+  }
+  .avatar-img {
+    height: 8rem !important;
+    width: calc(8rem * 3/4) !important;
+  }
+}
 .editor-container {
-  padding: 0 5vw;
+  padding: 0 60px;
   background-color: white;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+}
+.ql-tooltip {
+  z-index: 1 !important;
 }
 .introduction {
-  display: flex;
-  border-bottom: 1px solid #bbb;
+    padding-top: 2%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
 }
-.career {
-  border-bottom: 1px solid #bbb;
+.introduction-left {
+  text-align: left;
 }
-.education {
-  border-bottom: 1px solid #bbb;
+.introduction-right {
+  grid-column: 2 / span 3
 }
 .quill-editor:hover {
   background: #cdebf650;
+}
+.avatar-img {
+  height: 15rem;
+  width: calc(15rem * 3/4);
+}
+.input-effect {
+  background-color: white;
+  border: none;
+  border-radius: 0;
+}
+input:hover.input-effect {
+  background: #cdebf650;
   border: 1px dotted gainsboro;
 }
-/* .introduction .introduction-left {
-  justify-content: space-between;
-  flex: 1;
-  display: flex;
-  align-items: center;
-}
-.introduction .introduction-right {
-  flex: 1;
-} */
-.avatar-img {
-  margin-top: 16px;
-  height: 160px;
-  width: 120px;
+h2 {
+  font-size: 32px
 }
 </style>
