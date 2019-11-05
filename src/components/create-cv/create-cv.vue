@@ -5,7 +5,6 @@
         <!-- slides -->
         <swiper-slide v-for="template in templates">
           <b-img src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png" fluid class="image-tamplate" v-on:click="slideClick(template.path)"></b-img>
-          <!-- <span>{{template.title}}</span> -->
           <div style="color:red">Lượt xem: {{template.viewCount}}</div>
         </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -48,7 +47,7 @@ export default {
       swiperOption: {
         slidesPerView: 5,
         slidesPerColumn: 1,
-        spaceBetween: 10,
+        spaceBetween: 5,
         navigation: {
           nextEl: '.swiper-button-next',
           prevEl: '.swiper-button-prev'
@@ -94,10 +93,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.content-my-profile {
-}
-.content-my-profile .content {
-}
 @media only screen and (max-width: 768px) {
   .swiper-container {
     margin: 10px 10px !important;
@@ -105,13 +100,13 @@ export default {
   }
   .image-tamplate {
       height: 100px !important;
-      width: calc(100px * 3/4) !important;
+      width: calc(100px * 3/3) !important;
   }
 }
 .swiper-container {
   margin: 40px 40px;
-  border: 1px solid;
   min-height: 40px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 .title {
   text-align: left;
@@ -124,7 +119,7 @@ export default {
 .image-tamplate {
   cursor: pointer; 
   height: 150px; 
-  width: calc(150px * 3/4);
+  width: calc(150px * 3/3);
 }
 
 </style>

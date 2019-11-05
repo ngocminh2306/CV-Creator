@@ -2,7 +2,7 @@
   <div class="header__main">
     <div class="header__main_content">
       <ul>
-        <li>
+        <li style="display: none">
           <a
             href="#/"
             style="line-height: 38px; width: 50px;
@@ -22,9 +22,9 @@
           <a href="#/create-cv">Create CV</a>
         </li>
         <li v-if="!Authenticated" style="float: right;">
-          <b-dropdown class="m-2">
+          <b-dropdown class="m-2" variant="outline-info">
             <template v-slot:button-content>
-               Xin chào ({{userInfo.fullName}})
+               {{userInfo.fullName}}
             </template>
             <b-dropdown-item href="#/my-profile">My Profile</b-dropdown-item>
             <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>

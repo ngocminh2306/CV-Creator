@@ -1,11 +1,11 @@
 <template>
   <div>
-      Summer
+      winter
   </div>
 </template>
 <script>
 export default {
-  name: 'summer-cv',
+  name: 'winter-cv',
   props: [],
   data () {
     return {
