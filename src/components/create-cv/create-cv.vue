@@ -4,7 +4,7 @@
       <swiper :options="swiperOption">
         <!-- slides -->
         <swiper-slide v-for="template in templates">
-          <b-img src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png" fluid class="image-tamplate" v-on:click="slideClick(template.path)"></b-img>
+          <b-img src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png" fluid class="image-tamplate" v-on:click="slideClick(template)"></b-img>
           <div style="color:red">Lượt xem: {{template.viewCount}}</div>
         </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -12,13 +12,14 @@
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
+      <div class="d-flex justify-content-center mb-3" v-if="templates.length === 0"><b-spinner  label="Loading..."></b-spinner></div>
       <b-container>
         <form>
           <div class="title">
             <b-form-input placeholder="Title from 6 to 250 characters" v-model="params.title">
             </b-form-input>
           </div>
-          <div class="cv" ref="cv" id="cv">
+          <div v-bind:style="backgroundImage?{ 'background-image': 'url(' + backgroundImage + ')' }:{ 'background-color': 'white' }" class="cv" ref="cv" id="cv">
             <cvtemplate :data="params" :type="type" :key="keyTemplate"></cvtemplate>
           </div>
         </form>
@@ -38,6 +39,7 @@ export default {
   name: "createCV",
   data() {
     return {
+      backgroundImage: '',
       keyTemplate: 0,
       type: "default/default-cv",
       params: {
@@ -45,7 +47,7 @@ export default {
       },
       templates: [],
       swiperOption: {
-        slidesPerView: 5,
+        slidesPerView: 3,
         slidesPerColumn: 1,
         spaceBetween: 5,
         navigation: {
@@ -56,8 +58,10 @@ export default {
     };
   },
   methods: {
-    slideClick(path) {
-     this.type = path;
+    slideClick(template) {
+      console.log(template);
+      this.type = template.path;
+      this.backgroundImage = 'http://'+template.preview_img;
       this.keyTemplate++;
     },
     createPDF() {
@@ -104,7 +108,7 @@ export default {
   }
 }
 .swiper-container {
-  margin: 40px 40px;
+  margin: 40px 40px 0 40px;
   min-height: 40px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
@@ -115,6 +119,8 @@ export default {
 .cv {
   min-height: 100%;
   min-width: 50%;
+  background-position: center;
+  background-size: cover;
 }
 .image-tamplate {
   cursor: pointer; 

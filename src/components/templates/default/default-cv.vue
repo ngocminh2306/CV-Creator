@@ -138,7 +138,7 @@ export default {
 @media only screen and (max-width: 768px) {
   .editor-container {
     padding: 0 10px !important;
-    background-color: white;
+    background-color: #f0f2f5c4;
   }
   .avatar-img {
     height: 8rem !important;
@@ -147,7 +147,7 @@ export default {
 }
 .editor-container {
   padding: 0 60px;
-  background-color: white;
+  background-color: #f0f2f5c4;
 }
 .ql-tooltip {
   z-index: 1 !important;

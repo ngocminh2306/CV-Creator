@@ -10,6 +10,9 @@
           >&nbsp;</a>
         </li>
         <li>
+          <a href="#/">Home</a>
+        </li>
+        <li>
           <a href="#/mini-tools/salary-calculate">Mini Tools</a>
         </li>
         <li>
@@ -34,7 +37,7 @@
       </ul>
       <!-- Login Modal -->
       <b-modal id="modal-prevent-closing" ref="modalLogin" title="Đăng nhập" @show="resetModal" @hidden="resetModal" @ok="handleOk">
-        <template v-slot:modal-ok> Đăng nhập</template>
+        <template v-slot:modal-ok><b-spinner small v-if="loading"></b-spinner> Đăng nhập</template>
         <form ref="formLogin" @submit.stop.prevent="handleSubmit">
           <b-form-group :state="nameState" label="Tài khoản hoặc email" label-for="user-input" invalid-feedback="Name is required">
             <b-form-input id="user-input" v-model="user" :state="nameState" required ></b-form-input>
@@ -76,6 +79,7 @@ export default {
   props: [],
   data() {
     return {
+      loading: false,
       messenger: "",
       register_messenger: "",
       userInfo: { fullName: "" },
@@ -134,6 +138,7 @@ export default {
       }
     },
     login() {
+      this.loading = true
       if (this.user && this.password) {
         this.isModalVisible = false;
         this.$http.post(`/TokenAuth/Authenticate`, {
@@ -141,6 +146,7 @@ export default {
           password: this.password
         })
           .then(response => {
+            this.loading = false
             localStorage.setItem("token", response.data.result.accessToken);
             this.$http.get(`/User/user`, {
               headers: {
@@ -157,6 +163,7 @@ export default {
             });
           })
           .catch(error => {
+            this.loading = false
             this.messenger = error.response.data.error.details;
           });
       } else {
