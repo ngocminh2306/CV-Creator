@@ -4,7 +4,7 @@
       <swiper :options="swiperOption">
         <!-- slides -->
         <swiper-slide v-for="template in templates">
-          <b-img src="http://genknews.genkcdn.vn/2019/7/30/photo-1-15644709408241026395635.png" fluid class="image-tamplate" v-on:click="slideClick(template)"></b-img>
+          <b-img :src="'http://'+template.preview_img" fluid class="image-tamplate" v-on:click="slideClick(template)"></b-img>
           <div style="color:red">Lượt xem: {{template.viewCount}}</div>
         </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
