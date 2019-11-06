@@ -2,13 +2,6 @@
   <div class="header__main">
     <div class="header__main_content">
       <ul>
-        <li style="display: none">
-          <a
-            href="#/"
-            style="line-height: 38px; width: 50px;
-            background-image: url('https://www.truesales.vn/uploads/cv88-logo2.png'; background-repeat: no-repeat; background-size: contain;"
-          >&nbsp;</a>
-        </li>
         <li>
           <a href="#/">Home</a>
         </li>
@@ -25,7 +18,7 @@
           <a href="#/create-cv">Create CV</a>
         </li>
         <li v-if="!Authenticated" style="float: right;">
-          <b-dropdown class="m-2" variant="outline-info">
+          <b-dropdown variant="outline-info">
             <template v-slot:button-content>
                {{userInfo.fullName}}
             </template>
@@ -72,7 +65,6 @@
 </template>
 
 <script>
-import { HTTP } from "../../http-common";
 export default {
   components: { },
   name: "HeaderMain",
@@ -227,5 +219,8 @@ a {
 }
 a:hover {
   color:#007bff
+}
+.btn-group {
+  color: white;
 }
 </style>
