@@ -10,7 +10,7 @@
           >&nbsp;</a>
         </li>
         <li>
-          <a href="#/mini-tools">Mini Tools</a>
+          <a href="#/mini-tools/salary-calculate">Mini Tools</a>
         </li>
         <li>
           <a href="#/my-cv">My CV</a>

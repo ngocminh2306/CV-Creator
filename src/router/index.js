@@ -14,6 +14,7 @@ import WorkingSkill from '@/components/my-profile/WorkingSkill/WorkingSkill'
 import createCV from '@/components/create-cv/create-cv'
 import miniTools from '@/components/minitools/mini-tools'
 import SalaryCalculate from '@/components/minitools/salary-calculate/salary-calculate'
+import imageUpload from '@/components/minitools/image/image'
 
 Vue.use(Router)
 
@@ -97,6 +98,11 @@ export default new Router({
           path: '/mini-tools',
           name: 'salary-calculate',
           component: SalaryCalculate,
+        },
+        {
+          path: '/mini-tools/image-upload',
+          name: 'image-upload',
+          component: imageUpload,
         }
       ]
     }

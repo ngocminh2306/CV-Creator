@@ -1,13 +1,10 @@
 <template>
   <div class="">
     <div class="content">
-      <b-card no-body>
-        <b-tabs pills>
-          <b-tab to="/mini-tools/salary-calculate" title="Gross <-> Net" active></b-tab>
-          <b-tab title="Tab 2"></b-tab>
-          <b-tab title="Tab 3"></b-tab>
-        </b-tabs>
-      </b-card>
+      <b-nav tabs >
+          <b-nav-item to="/mini-tools/salary-calculate">Tính lương</b-nav-item>
+          <b-nav-item to="/mini-tools/image-upload">Upload ảnh</b-nav-item>
+      </b-nav>
       <router-view/>
     </div>
   </div>
@@ -33,5 +30,10 @@ export default {
   }
   .content {
     padding: 5vh 20vw
+  }
+  .router-link-active {
+    color: #495057;
+    background-color: #fff;
+    border-color: #dee2e6 #dee2e6 #fff;
   }
 </style>
