@@ -59,9 +59,9 @@ export default {
   },
   methods: {
     slideClick(template) {
-      console.log(template);
       this.type = template.path;
       this.backgroundImage = 'http://'+template.preview_img;
+      this.params.title = template.title;
       this.keyTemplate++;
     },
     createPDF() {
@@ -108,7 +108,7 @@ export default {
   }
 }
 .swiper-container {
-  margin: 40px 40px 0 40px;
+  margin: 40px 40px 20px 40px;
   min-height: 40px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
