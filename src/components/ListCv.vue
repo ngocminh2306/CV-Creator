@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-if="!logined" class="content">
+    <div v-if="!logined&&!loading" class="content">
       <b-alert show variant="danger" >Bạn chưa đăng nhập.</b-alert>
     </div>
+    <div class="d-flex justify-content-center mt-3" v-if="loading"><b-spinner  label="Loading..."></b-spinner></div>
     <div v-if="logined" class="content">
       <div class="title-list-cv">
         <label>List CV</label>
@@ -48,14 +49,21 @@ export default {
   name: "ListCv",
   data() {
     return {
+      loading: false,
       logined: false
     };
   },
   mounted() {
+    this.loading = true;
     this.$http.get(`/User/user`, {
       headers: { Authorization: "Bearer " + localStorage.getItem("token") }
     }).then(res => {
+      this.loading = false;
       this.logined = true;
+    })
+    .catch(error => {
+      this.loading = false
+      this.logined = false;
     });
   }
 };

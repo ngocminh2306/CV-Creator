@@ -2,17 +2,34 @@
   <div>
     <swiper :options="swiperOption">
       <!-- slides -->
-      <swiper-slide v-for="template in templates">
-          <img style="height:95vh;width:100vw" src="@/assets/slide.jpg">
+      <swiper-slide v-for="template in templates" style="">
+        <div v-bind:style="{ 'background-image': 'url(' + require('@/assets/slide.jpg') + ')' }" class="background-bc" >
+          <div>
+            <span class="subtitle title">Tạo cv nhanh chóng với hàng chục mẫu cv miễn phí.</span>
+            <div>
+              <b-button class="button-get-now" variant="info" size="lg" href="#/create-cv">Tạo CV ngay</b-button>
+            </div>
+          </div>
+        <!-- <img style="width: 100%;height: auto;visibility: hidden;" src="@/assets/slide.jpg"> -->
+        </div>
+        <div class="swiper-pagination" slot="pagination"></div>
+        
       </swiper-slide>
       <!-- Optional controls -->
-      <div class="swiper-pagination" slot="pagination"></div>
-      <span class="subtitle title">Tạo cv nhanh chóng với hàng chục mẫu cv miễn phí.</span>
-      <b-button class="button-get-now" variant="info" size="lg" href="#/create-cv">Tạo CV ngay</b-button>
     </swiper>
-    <!-- <div class="title"> -->
-        
-    <!-- </div> -->
+    <b-container class="bv-example-row">
+      <b-row class="text-center">
+        <b-col>1 of 3</b-col>
+        <b-col cols="8">2 of 3 (wider)</b-col>
+        <b-col>3 of 3</b-col>
+      </b-row>
+
+      <b-row class="text-center">
+        <b-col>1 of 3</b-col>
+        <b-col cols="5">2 of 3 (wider)</b-col>
+        <b-col>3 of 3</b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
@@ -54,6 +71,15 @@ export default {
   font-size: 24px;
   font-weight: 900;
 }
+.background-bc {
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vw*700/1348);
+}
 @media only screen and (max-width: 768px) {
   .content {
     display: block;
@@ -72,22 +98,13 @@ export default {
 }
 
 .title {
-    position: absolute;
-    right: 15%;
-    top: 10vw;
-    left: 15%;
-    z-index: 10;
     color: #fff;
     text-align: center;
 }
 .button-get-now {
-    position: absolute;
-    top: 14vw;
-    left: 45%;
-    z-index: 10;
 }
 .subtitle {
-    font-size: 5vh;
+    font-size: 1.5em;
     font-weight: 500;
 }
 </style>

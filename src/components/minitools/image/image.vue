@@ -9,6 +9,7 @@
             @change="fileChange"
         ></b-form-file>
         <b-button v-on:click="uploadFile()">Upload</b-button>
+        <div class="d-flex justify-content-center mt-3" v-if="loading"><b-spinner  label="Loading..."></b-spinner></div>
         <img :src="result" alt="Fluid image" v-if="result"/>
         <div> {{result}}</div>  
     </div>
@@ -18,6 +19,7 @@ export default {
   name: "image-upload",
   data() {
     return { 
+        loading: false,
         file: null,
         fileEvent: null,
         result: null
@@ -28,10 +30,14 @@ export default {
         this.fileEvent = event;
     },
     uploadFile() {
-        var file = this.fileEvent.target.files[0];
+        this.loading = true
+        var file = this.fileEvent.target.files[0]
         this.getFile(file).then((customJsonFile) => {
             this.$http.post(`/Common/PostFile`,customJsonFile).then(res => {
                 this.result = 'http://'+res.data.result;
+                this.loading = false
+            }).catch(error => {
+                this.loading = false
             })
         })
     },

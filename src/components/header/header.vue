@@ -17,16 +17,14 @@
         <li>
           <a href="#/create-cv">Create CV</a>
         </li>
-        <li v-if="!Authenticated" style="float: right;">
-          <b-dropdown variant="outline-info">
-            <template v-slot:button-content>
-               {{userInfo.fullName}}
-            </template>
-            <b-dropdown-item href="#/my-profile">My Profile</b-dropdown-item>
-            <b-dropdown-item @click="logout()">Đăng xuất</b-dropdown-item>
-          </b-dropdown>
-        </li>
-        <li v-if="Authenticated" style="float: right; margin-bottom: 1vh;"> <b-button v-b-modal.modal-prevent-closing>Đăng nhập</b-button></li>
+        <div v-if="!Authenticated" class="dropdown" style="float: right;">
+          <button class="dropbtn">{{userInfo.fullName}}</button>
+          <div class="dropdown-content">
+            <a href="#/my-profile">My Profile</a>
+            <a href="#/" @click="logout()">Đăng xuất</a>
+          </div>
+        </div>
+        <div v-if="Authenticated" class="dropdown" style="float: right;"> <button class="dropbtn" v-b-modal.modal-prevent-closing>Đăng nhập</button></div>
       </ul>
       <!-- Login Modal -->
       <b-modal id="modal-prevent-closing" ref="modalLogin" title="Đăng nhập" @show="resetModal" @hidden="resetModal" @ok="handleOk">
@@ -211,16 +209,52 @@ li {
   display: inline-block;
   padding: 0 20px;
 }
+li:hover {
+  background-color: #343664;
+}
+a:hover {
+  color: aliceblue;
+}
 a {
   text-decoration: none;
   display: block;
   color: white;
   cursor: pointer;
 }
-a:hover {
-  color:#007bff
-}
-.btn-group {
+.dropbtn {
+  background-color: transparent;
   color: white;
+  /* padding: 16px; */
+  /* font-size: 16px; */
+  border: none;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #2a2b50;
+  padding: 5px 0;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 2;
+}
+.dropdown-content a {
+  color: white;
+  white-space: unset;
+  padding: 5px 15px;
+  line-height: 1.8;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #343664;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: #343664;}
+
 </style>
