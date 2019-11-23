@@ -2,7 +2,7 @@
   <div class="content-my-profile">
     <div class="content">
       <div class="slide">
-        <router-link to="/my-profile/infomation">Infomation</router-link>
+        <router-link :to="{ path : '/my-profile/infomation', params : { user : user } }">Infomation</router-link>
         <router-link to="/my-profile/career-goal">Career Goal</router-link>
         <router-link to="/my-profile/education">Education</router-link>
         <router-link to="/my-profile/achievement">Achievement</router-link>
@@ -26,7 +26,7 @@ export default {
   name: "my-profile",
   data() {
     return {
-      userInfo: {
+      user: {
         fullName: ''
       }
     };
@@ -37,8 +37,9 @@ export default {
             Authorization: "Bearer " + localStorage.getItem("token")
           }
         }).then(res => {
-          localStorage.setItem("user", JSON.stringify(res.data.result));
-          this.userInfo.fullName = res.data.result.fullName;
+          this.user = res.data.result;
+          localStorage.setItem("user",JSON.stringify(this.user))
+          console.log(this.user);
         }).catch (e=> {
           reject();
         });
@@ -55,7 +56,6 @@ export default {
   margin: 5vh 5vw;
   display: flex;
   flex-direction: row;
-  /* max-width: 90%; */
 }
 .slide {
   display: flex;

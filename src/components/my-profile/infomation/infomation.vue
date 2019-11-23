@@ -23,7 +23,7 @@
             <span class="required">*</span>
           </label>
         </div>
-        <input v-model="infomation.dateOfBirth" placeholder="Date of birth">
+        <input v-model="infomation.dateOfBirth" type="date" placeholder="Date of birth">
       </div>
       <div class="input-content">
         <div class="label">
@@ -32,7 +32,7 @@
             <span class="required">*</span>
           </label>
         </div>
-        <input required v-model="infomation.email" placeholder="Email">
+        <input required v-model="infomation.emailAddress" placeholder="Email">
       </div>
       <div class="input-content">
         <div class="label">
@@ -80,7 +80,7 @@ export default {
         fullName: "",
         job_title: "",
         dateOfBirth: "",
-        email: "",
+        emailAddress: "",
         phone_number: "",
         address: "",
         github: "",
@@ -93,32 +93,38 @@ export default {
       if (this.isComplete()) {
         const parsed = JSON.stringify(this.infomation);
         localStorage.setItem("infomation", parsed);
-        this.$http.post(`/UserInfo/update`,data).then(response => {
+        this.$http.put(`/services/app/User/UpdateUserInfo`,data).then(response => {
         }).catch(error => {
 
         })
+      }else {
+        return
       }
     },
     isComplete() {
+      debugger
       return (
+        this.infomation.id&&
         this.infomation.fullName &&
         this.infomation.dateOfBirth &&
-        this.infomation.email &&
-        this.infomation.phone &&
+        this.infomation.emailAddress &&
+        this.infomation.phone_number &&
         this.infomation.address
       );
     }
   },
-  computed: {},
+  computed: {
+  },
   mounted() {
     let userInfo = JSON.parse(localStorage.getItem("user"));
     if (userInfo) {
-      this.infomation.fullName = userInfo.fullName;
-      this.infomation.dateOfBirth = userInfo.birthday;
-      this.infomation.phone = userInfo.phone_number;
-      this.infomation.email = userInfo.emailAddress;
-      this.infomation.address = userInfo.address;
-      this.infomation.job = userInfo.job_title;
+      this.infomation = userInfo;
+      // this.infomation.fullName = userInfo.fullName;
+      // this.infomation.dateOfBirth = userInfo.birthday;
+      // this.infomation.phone = userInfo.phone_number;
+      // this.infomation.emailAddress = userInfo.emailAddress;
+      // this.infomation.address = userInfo.address;
+      // this.infomation.job = userInfo.job_title;
     }
   }
 };

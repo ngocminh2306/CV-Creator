@@ -56,8 +56,10 @@
 <script>
 export default {
   name: "Education",
+  props: ['user'],
   data() {
     return {
+      user,
       editorOption: {
         // some quill options
         placeholder: "Study process",
@@ -97,6 +99,7 @@ export default {
     };
   },
   mounted() {
+    console.log(user);
     let userInfo = JSON.parse(localStorage.getItem('user'));
     this.education.school = userInfo.education.graduationPlace;
     this.education.studyProcess = userInfo.education.name;
