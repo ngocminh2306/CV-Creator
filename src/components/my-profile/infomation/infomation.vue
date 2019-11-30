@@ -102,7 +102,6 @@ export default {
       }
     },
     isComplete() {
-      debugger
       return (
         this.infomation.id&&
         this.infomation.fullName &&

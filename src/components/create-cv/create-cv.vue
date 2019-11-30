@@ -4,7 +4,12 @@
       <swiper :options="swiperOption">
         <!-- slides -->
         <swiper-slide v-for="template in templates">
-          <b-img :src="'http://'+template.preview_img" fluid class="image-tamplate" v-on:click="slideClick(template)"></b-img>
+          <b-img
+            :src="'http://'+template.preview_img"
+            fluid
+            class="image-tamplate"
+            v-on:click="slideClick(template)"
+          ></b-img>
           <div style="color:red">Lượt xem: {{template.viewCount}}</div>
         </swiper-slide>
         <div class="swiper-button-prev" slot="button-prev"></div>
@@ -12,14 +17,20 @@
         <!-- Optional controls -->
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
-      <div class="d-flex justify-content-center mb-3" v-if="templates.length === 0"><b-spinner  label="Loading..."></b-spinner></div>
+      <div class="d-flex justify-content-center mb-3" v-if="templates.length === 0">
+        <b-spinner label="Loading..."></b-spinner>
+      </div>
       <b-container>
         <form>
           <div class="title">
-            <b-form-input placeholder="Title from 6 to 250 characters" v-model="params.title">
-            </b-form-input>
+            <b-form-input placeholder="Title from 6 to 250 characters" v-model="params.title"></b-form-input>
           </div>
-          <div v-bind:style="backgroundImage?{ 'background-image': 'url(' + backgroundImage + ')' }:{ 'background-color': 'white' }" class="cv" ref="cv" id="cv">
+          <div
+            v-bind:style="backgroundImage?{ 'background-image': 'url(' + backgroundImage + ')' }:{ 'background-color': 'white' }"
+            class="cv"
+            ref="cv"
+            id="cv"
+          >
             <cvtemplate :data="params" :type="type" :key="keyTemplate"></cvtemplate>
           </div>
         </form>
@@ -39,11 +50,33 @@ export default {
   name: "createCV",
   data() {
     return {
-      backgroundImage: '',
+      backgroundImage: "",
       keyTemplate: 0,
       type: "default/default-cv",
       params: {
-        title: "Title from 6 to 260 characters"
+        title: "Title from 6 to 260 characters",
+        editorOption: {
+          placeholder: "Nhập thông tin",
+          modules: {
+            toolbar: [[], []]
+          },
+          theme: "bubble"
+        },
+        introduction: {
+          fullName: "Nguyễn Văn A",
+          birthday: "23-12-1990",
+          phonenumber: "Số điện thoại",
+          email: "email@gmail.com",
+          address: "Việt Nam"
+        },
+        education: {
+          graduationPlace: "Đại học của bạn",
+          name: "Đại học",
+          rankings: "10/10"
+        },
+        experience: {
+
+        }
       },
       templates: [],
       swiperOption: {
@@ -51,8 +84,8 @@ export default {
         slidesPerColumn: 1,
         spaceBetween: 5,
         navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
         }
       }
     };
@@ -60,37 +93,38 @@ export default {
   methods: {
     slideClick(template) {
       this.type = template.path;
-      this.backgroundImage = 'http://'+template.preview_img;
+      this.backgroundImage = "http://" + template.preview_img;
       this.params.title = template.title;
       this.keyTemplate++;
     },
     createPDF() {
       let width = this.$refs["cv"].clientWidth;
       let height = this.$refs["cv"].clientHeight;
-      
       html2canvas(this.$refs["cv"], { width: width, height: height }).then(
         canvas => {
           let pdf = new jsPDF();
+          // var hratio = height / width;
 
-          var hratio = height/width;
-
-          var w = pdf.internal.pageSize.width;    
-          var h = w * hratio;
-
-          pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, w, h);
+          // var w = pdf.internal.pageSize.width;
+          // var h = w * hratio;
+          let preview = canvas.toDataURL("image/png");
+          console.log(preview);
+          pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0);
           pdf.save(this.params.title + ".pdf");
         }
       );
     }
   },
   mounted() {
-    this.$http.get(`/CVTemplate/GetTemplates`, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token")
-      }
-    }).then(res => {
-      this.templates = res.data.result.items;
-    });
+    this.$http
+      .get(`/CVTemplate/GetTemplates`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(res => {
+        this.templates = res.data.result.items;
+      });
   }
 };
 </script>
@@ -103,8 +137,8 @@ export default {
     min-height: 20px !important;
   }
   .image-tamplate {
-      height: 100px !important;
-      width: calc(100px * 3/3) !important;
+    height: 100px !important;
+    width: calc(100px * 3 / 3) !important;
   }
 }
 .swiper-container {
@@ -123,9 +157,8 @@ export default {
   background-size: cover;
 }
 .image-tamplate {
-  cursor: pointer; 
-  height: 150px; 
-  width: calc(150px * 3/3);
+  cursor: pointer;
+  height: 150px;
+  width: calc(150px * 3 / 3);
 }
-
 </style>

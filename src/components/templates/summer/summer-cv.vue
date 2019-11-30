@@ -4,86 +4,73 @@
       <div class="introduction-left" style="display:block">
         <img @click="img_click" ref="preview" src="@/assets/saitama.jpg" class="avatar-img">
         <input style="display: none" ref="input-img" type="file" @change="onFileSelected">
-        <quill-editor placeholder="name" :options="editorOption">
+        <quill-editor placeholder="name" v-model="data.introduction.fullName" :options="data.editorOption">
         </quill-editor>
       </div>
       <div class="introduction-right">
-        <quill-editor draggable="true" :options="editorOption"></quill-editor>
-        <quill-editor draggable="true" :options="editorOption"></quill-editor>
-        <quill-editor draggable="true" :options="editorOption"></quill-editor>
-        <quill-editor draggable="true" :options="editorOption"></quill-editor>
+        <quill-editor v-model="data.introduction.birthday" :options="data.editorOption"></quill-editor>
+        <quill-editor v-model="data.introduction.phonenumber" :options="data.editorOption"></quill-editor>
+        <quill-editor v-model="data.introduction.email" :options="data.editorOption"></quill-editor>
+        <quill-editor v-model="data.introduction.address" :options="data.editorOption"></quill-editor>
       </div>
     </div>
     <div class="career">
       <h2 style="text-align: left;">CAREER GOALS</h2>
       <div class="career-left">
-        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
       </div>
       <div class="career-right">
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
       </div>
     </div>
     <div class="education">
       <h2 style="text-align: left;">EDUCATION</h2>
       <div class="introduction-right">
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
+        <quill-editor v-model="data.education.graduationPlace" :options="data.editorOption"></quill-editor>
+        <quill-editor v-model="data.education.rankings" :options="data.editorOption"></quill-editor>
+        <quill-editor v-model="data.education.name" :options="data.editorOption"></quill-editor>
       </div>
     </div>
     <div class="career">
       <h2 style="text-align: left;">WORK EXPERIENCE</h2>
       <div class="introduction-left">
-        <quill-editor   :options="editorOption"></quill-editor>
+        <quill-editor   :options="data.editorOption"></quill-editor>
       </div>
       <div class="introduction-right">
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
       </div>
     </div>
     <div class="career">
       <h2 style="text-align: left;">LANGUAGES</h2>
       <div class="introduction-left">
-        <quill-editor :options="editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
       </div>
       <div class="introduction-right">
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
-        <quill-editor :options="editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
+        <quill-editor :options="data.editorOption"></quill-editor>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  name: 'summer-cv',
-  props: [],
-  data () {
+  name: "default-cv",
+  props: ['data'],
+  data() {
     return {
-      editorOption: {
-        // some quill options
-        theme: 'bubble',
-        placeholder: 'Name',
-        modules: {
-          toolbar: [[], []]
-        }
-      },
-      params: {
-        title: 'Title from 6 to 260 characters',
-        introduction: {
-          name: 'MINH'
-        }
-      }
-    }
+      selectedFile: null
+    };
   },
   methods: {
     img_click() {
@@ -107,8 +94,12 @@ export default {
     }
   },
   computed: {},
-  mounted () {}
-}
+  created() {
+    console.log(this.data)
+  },
+  mounted() {
+  }
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

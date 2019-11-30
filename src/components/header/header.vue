@@ -8,10 +8,10 @@
         <li>
           <a href="#/mini-tools/salary-calculate">Mini Tools</a>
         </li>
-        <li>
+        <li v-if="!Authenticated">
           <a href="#/my-cv">My CV</a>
         </li>
-        <li>
+        <li v-if="!Authenticated">
           <a href="#/my-profile">My Profile</a>
         </li>
         <li>
