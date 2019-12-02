@@ -13,6 +13,7 @@ import html2canvas from 'html2canvas'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
+import CKEditor from '@ckeditor/ckeditor5-vue'
 //
 import 'swiper/dist/css/swiper.css'
 //
@@ -21,6 +22,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(VueRx)
+Vue.use(CKEditor)
 
 Vue.use(VueAwesomeSwiper)
 Vue.use(VueQuillEditor)

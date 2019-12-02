@@ -75,7 +75,11 @@ export default {
           rankings: "10/10"
         },
         experience: {
-
+          company:"Công ty TNHH A",
+          from:"10/10/2010",
+          to: "10/10/2018",
+          position:"Ha Noi",
+          desscription:"Chi tiết"
         }
       },
       templates: [],

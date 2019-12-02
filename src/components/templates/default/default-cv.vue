@@ -35,41 +35,29 @@
         <quill-editor v-model="data.education.name" :options="data.editorOption"></quill-editor>
       </div>
     </div>
-    <div class="career">
-      <h2 style="text-align: left;">WORK EXPERIENCE</h2>
-      <div class="introduction-left">
-        <quill-editor   :options="data.editorOption"></quill-editor>
-      </div>
-      <div class="introduction-right">
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-      </div>
-    </div>
-    <div class="career">
-      <h2 style="text-align: left;">LANGUAGES</h2>
-      <div class="introduction-left">
-        <quill-editor :options="data.editorOption"></quill-editor>
-      </div>
-      <div class="introduction-right">
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-      </div>
-    </div>
+    <expericence :data="data.experience"></expericence>
+    <Language></Language>
   </div>
 </template>
 <script>
+import InlineEditor from '@ckeditor/ckeditor5-build-inline';
+import Language from '@/components/cv-element/language';
+import expericence from '@/components/cv-element/expericence';
 export default {
   name: "default-cv",
   props: ['data'],
+  components: {
+    Language,
+    expericence
+  },
   data() {
     return {
-      selectedFile: null
+      selectedFile: null,
+      editor: InlineEditor,
+      editorData: '',
+      editorConfig: {
+          // The configuration of the editor.
+      }
     };
   },
   methods: {
@@ -104,6 +92,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.block {
+  display: flex
+}
 @media only screen and (max-width: 768px) {
   .editor-container {
     padding: 0 10px !important;
