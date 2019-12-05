@@ -21,6 +21,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import BootstrapVue from 'bootstrap-vue'
+import store  from './store'
 Vue.use(VueRx)
 Vue.use(CKEditor)
 
@@ -44,6 +45,7 @@ Vue.prototype.$http = base
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

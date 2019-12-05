@@ -63,6 +63,7 @@
 </template>
 
 <script>
+import {Vuex,mapState, mapGetters}  from 'vuex'
 export default {
   components: { },
   name: "HeaderMain",
@@ -74,7 +75,7 @@ export default {
       register_messenger: "",
       userInfo: { fullName: "" },
       Authenticated: false,
-      user: "",
+      data: mapGetters(['getUser']),
       password: "",
       register: {
         user: "",
@@ -128,28 +129,32 @@ export default {
       }
     },
     login() {
+      var self = this;
       this.loading = true
       if (this.user && this.password) {
         this.isModalVisible = false;
         this.$http.post(`/TokenAuth/Authenticate`, {
-          userNameOrEmailAddress: this.user,
-          password: this.password
+          userNameOrEmailAddress: self.user,
+          password: self.password
         })
           .then(response => {
-            this.loading = false
+            self.loading = false
             localStorage.setItem("token", response.data.result.accessToken);
-            this.$http.get(`/User/user`, {
+            self.$http.get(`/User/user`, {
               headers: {
                 Authorization: "Bearer " + localStorage.getItem("token")
               }
             }).then(res => {
               localStorage.setItem("user", JSON.stringify(res.data.result));
-              this.userInfo.fullName = res.data.fullName;
+              self.userInfo.fullName = res.data.fullName;
               // Hide the modal manually
-              this.$nextTick(() => {
-                this.$refs.modalLogin.hide()
+              self.$nextTick(() => {
+                self.$refs.modalLogin.hide()
               })
-              this.$emit("reset");
+              self.$store.dispatch('addUser',res.data.result)
+              console.log(self.$store)
+              
+              self.$emit("reset");
             });
           })
           .catch(error => {
@@ -162,10 +167,17 @@ export default {
     },
     checkAuthenticate() {
       if (localStorage.getItem("token")) {
-        this.Authenticated = false;
-        var r = localStorage.getItem("user");
-        var user = JSON.parse(localStorage.getItem("user"));
-        this.userInfo.fullName = user.fullName;
+        var self = this
+        
+        this.$http.get(`/User/user`, {
+              headers: {
+                Authorization: "Bearer " + localStorage.getItem("token")
+              }
+            }).then(res => {
+              self.$store.dispatch('addUser',res.data.result)
+              self.userInfo.fullName = res.data.result.fullName;
+              self.Authenticated = false;
+            })
       } else {
         this.Authenticated = true;
       }
@@ -173,6 +185,9 @@ export default {
   },
   mounted() {
     this.checkAuthenticate();
+  },
+  computed: {
+    ...mapGetters(['getUser'])
   }
 };
 </script>
@@ -224,8 +239,6 @@ a {
 .dropbtn {
   background-color: transparent;
   color: white;
-  /* padding: 16px; */
-  /* font-size: 16px; */
   border: none;
 }
 

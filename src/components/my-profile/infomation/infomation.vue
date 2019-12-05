@@ -65,7 +65,7 @@
         <input v-model="infomation.facebook" placeholder="Facebook">
       </div>
       <div class="update-button">
-        <button type="submit" v-on:click="commitInfomation(infomation)">Update</button>
+        <button v-on:click="commitInfomation(infomation)">Update</button>
       </div>
     </form>
   </div>
@@ -89,13 +89,13 @@ export default {
     };
   },
   methods: {
-    commitInfomation: function(data) {
+    commitInfomation(data) {
       if (this.isComplete()) {
-        const parsed = JSON.stringify(this.infomation);
-        localStorage.setItem("infomation", parsed);
-        this.$http.put(`/services/app/User/UpdateUserInfo`,data).then(response => {
+        const parsed = JSON.stringify(this.infomation)
+        localStorage.setItem("infomation", parsed)
+        this.$http.put(`/services/app/User/UpdateUserInfo`,{id: this.infomation.id,fullName: this.infomation.fullName,phone_number: this.infomation.phone_number,address: this.infomation.address}).then(response => {
         }).catch(error => {
-
+          console.log(error)
         })
       }else {
         return
@@ -118,12 +118,6 @@ export default {
     let userInfo = JSON.parse(localStorage.getItem("user"));
     if (userInfo) {
       this.infomation = userInfo;
-      // this.infomation.fullName = userInfo.fullName;
-      // this.infomation.dateOfBirth = userInfo.birthday;
-      // this.infomation.phone = userInfo.phone_number;
-      // this.infomation.emailAddress = userInfo.emailAddress;
-      // this.infomation.address = userInfo.address;
-      // this.infomation.job = userInfo.job_title;
     }
   }
 };

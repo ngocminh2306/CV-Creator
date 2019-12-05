@@ -1,5 +1,5 @@
 <template>
-    <div>
+   <div>
         <b-row>
             <b-col class="col-content" cols="6"  v-for="(item, index) in editorData" :key="index">
                 <b-button class="remove-button" @click="removeElement(index)" variant="danger">Remove</b-button>
@@ -12,34 +12,49 @@
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 
 export default {
-  name: "language",
+  name: "education",
   props: ['data'],
   data() {
     return {
-      selectedFile: null,
-      defaultData: [`<h4>Tiếng Anh</h4>
+        selectedFile: null,
+        defaultData: this.data?this.data.map(x=>{
+            return `<h4>${x.name}</h4>
                 <ul>
-                    <li>Trinh độ A1</li>
+                    <li>
+                        ${x.graduationPlace}
+                    </li>
+                    <li>
+                        ${x.rankings}
+                    </li>
             </ul>
-        `],
-      editor: InlineEditor,
-      editorData: [`<h4>Tiếng Anh</h4>
+        `
+        }):[''],
+        editor: InlineEditor,
+        editorData: [this.data[0]?`<h4>${this.data[0].name}</h4>
                 <ul>
-                    <li>Trinh độ A1</li>
+                    <li>
+                        ${this.data[0].graduationPlace}
+                    </li>
+                    <li>
+                        ${this.data[0].rankings}
+                    </li>
             </ul>
-        `],
+        `:['']
+        ],
       editorConfig: {
           // The configuration of the editor.
       }
     };
   },
   methods: {
-     removeElement(index) {
+      removeElement(index) {
           this.editorData.splice(index, 1)
       },
       addElement() {
           this.editorData.unshift(this.defaultData?this.defaultData[0]:'')
       }
+  },
+  mounted() {
   }
 };
 </script>
@@ -47,17 +62,17 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
     .ck.ck-content:hover {
-      background: #cdebf650;
+        background: #cdebf650;
     }
     .remove-button {
-      position: absolute;
-      top: 5px;
-      right: 20px;
+        position: absolute;
+        top: 5px;
+        right: 20px;
     }
     .col-content .remove-button {
-      display: none;
+        display: none;
     }
     .col-content:hover .remove-button {
-      display: inline-block;
+        display: inline-block;
     }
 </style>

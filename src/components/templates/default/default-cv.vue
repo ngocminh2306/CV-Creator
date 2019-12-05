@@ -2,144 +2,144 @@
   <div class="editor-container">
     <div class="introduction">
       <div class="introduction-left" style="display:block">
-        <img @click="img_click" ref="preview" src="@/assets/saitama.jpg" class="avatar-img">
-        <input style="display: none" ref="input-img" type="file" @change="onFileSelected">
-        <quill-editor placeholder="name" v-model="data.introduction.fullName" :options="data.editorOption">
-        </quill-editor>
+        <cvAvatar></cvAvatar>
+        <div style="display: flex;">
+          <img class="cv-icon" src="@/assets/icon/icons8-user-50.png"/>
+          <input class="cv-input" v-model="user.fullName">
+        </div>
       </div>
       <div class="introduction-right">
-        <quill-editor v-model="data.introduction.birthday" :options="data.editorOption"></quill-editor>
-        <quill-editor v-model="data.introduction.phonenumber" :options="data.editorOption"></quill-editor>
-        <quill-editor v-model="data.introduction.email" :options="data.editorOption"></quill-editor>
-        <quill-editor v-model="data.introduction.address" :options="data.editorOption"></quill-editor>
+        <div style="display: flex;">
+          <img class="cv-icon" src="@/assets/icon/icons8-phone-50.png"/>
+          <input class="cv-input" v-model="user.phone_number">
+        </div>
+        <div style="display: flex;">
+          <img class="cv-icon" src="@/assets/icon/icons8-birthday-cake-80.png"/>
+          <input class="cv-input" v-model="user.birthday">
+        </div>
+        <div style="display: flex;">
+          <img class="cv-icon" src="@/assets/icon/icons8-email-open-32.png"/>
+          <input class="cv-input" v-model="user.emailAddress">
+        </div>
+        <div style="display: flex;">
+          <img class="cv-icon" src="@/assets/icon/icons8-address-50.png"/>
+          <input class="cv-input" v-model="user.address">
+        </div>
       </div>
     </div>
     <div class="career">
       <h2 style="text-align: left;">CAREER GOALS</h2>
-      <div class="career-left">
-        <quill-editor :options="data.editorOption"></quill-editor>
-      </div>
-      <div class="career-right">
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-        <quill-editor :options="data.editorOption"></quill-editor>
-      </div>
+      <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
     </div>
-    <div class="education">
-      <h2 style="text-align: left;">EDUCATION</h2>
-      <div class="introduction-right">
-        <quill-editor v-model="data.education.graduationPlace" :options="data.editorOption"></quill-editor>
-        <quill-editor v-model="data.education.rankings" :options="data.editorOption"></quill-editor>
-        <quill-editor v-model="data.education.name" :options="data.editorOption"></quill-editor>
-      </div>
+    <div style="display: flex" class="block">
+      <h2 style="text-align: left;flex: 1">EDUCATION</h2>
+      <b-button class="add-button" @click="addEducationElement()">Thêm</b-button>
     </div>
-    <expericence :data="data.experience"></expericence>
-    <Language></Language>
+    <education ref="education" :data="data.user.education"></education>
+    <div style="display: flex" class="block">
+      <h2 style="text-align: left; flex: 1">WORK EXPERIENCE</h2>
+      <b-button class="add-button" @click="addExpericenceElement()">Thêm</b-button>
+    </div>
+    <expericence ref="expericence" class="expericence" :data="data.user.experience"></expericence>
+    <div style="display: flex" class="block">
+      <h2 style="text-align: left; flex: 1">LANGUAGES</h2>
+      <b-button class="add-button" @click="addLanguageElement()">Thêm</b-button>
+    </div>
+    <Language ref="language"></Language>
   </div>
 </template>
 <script>
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
 import Language from '@/components/cv-element/language';
+import cvAvatar from '@/components/cv-element/cv-avatar'
 import expericence from '@/components/cv-element/expericence';
+import education from '@/components/cv-element/education'
 export default {
   name: "default-cv",
   props: ['data'],
   components: {
     Language,
+    cvAvatar,
+    education,
     expericence
   },
   data() {
     return {
-      selectedFile: null,
-      editor: InlineEditor,
-      editorData: '',
-      editorConfig: {
+        user: this.data.user,
+        editor: InlineEditor,
+        editorData: `<ul>
+          <li>Mong muốn học hỏi kinh nghiệm ở môi trường làm việc chuyên nghiệp, năng động.&nbsp;</li>
+          <li>Có cơ hội thăng tiên cao thành công trong công việc</li>
+        </ul>`,
+        editorConfig: {
           // The configuration of the editor.
       }
     };
   },
   methods: {
-    img_click() {
-      this.$refs["input-img"].click();
+    addEducationElement() {
+      this.$refs.education.addElement()
     },
-    onFileSelected(event) {
-      var file = event.target.files[0];
-      var reader = new FileReader();
-      var preview = this.$refs["preview"];
-      reader.addEventListener(
-        "load",
-        function() {
-          preview.src = reader.result;
-        },
-        false
-      );
-      if (file) {
-        reader.readAsDataURL(file);
-      }
-      this.selectedFile = window.URL.createObjectURL(event.target.files[0]);
+    addExpericenceElement() {
+      this.$refs.expericence.addElement()
+    },
+    addLanguageElement() {
+      this.$refs.language.addElement()
     }
   },
-  computed: {},
-  created() {
-    console.log(this.data)
-  },
   mounted() {
+    console.log(this.data)
   }
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.block {
-  display: flex
-}
 @media only screen and (max-width: 768px) {
   .editor-container {
     padding: 0 10px !important;
-    background-color: #f0f2f5c4;
-  }
-  .avatar-img {
-    height: 8rem !important;
-    width: calc(8rem * 3/4) !important;
   }
 }
+.block .add-button {
+  display: none;
+}
+.block:hover {
+  background-color: #cacaca8c;
+}
+.block:hover .add-button{
+  display: inline-block;
+}
+
 .editor-container {
   padding: 0 60px;
-  background-color: #f0f2f5c4;
-}
-.ql-tooltip {
-  z-index: 1 !important;
 }
 .introduction {
-    padding-top: 2%;
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
+  padding-left: 2%;
+  padding-top: 2%;
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
 }
 .introduction-left {
   text-align: left;
 }
 .introduction-right {
-  grid-column: 2 / span 3
+  grid-column: 2 / span 4
 }
 .quill-editor:hover {
   background: #cdebf650;
 }
-.avatar-img {
-  height: 15rem;
-  width: calc(15rem * 3/4);
-}
-.input-effect {
-  background-color: white;
-  border: none;
-  border-radius: 0;
-}
-input:hover.input-effect {
-  background: #cdebf650;
-  border: 1px dotted gainsboro;
-}
 h2 {
   font-size: 32px
+}
+.cv-input {
+  width: 100%;
+  border-color: transparent;
+  background-color: transparent;
+  padding: 10px 0px 10px 0px;
+}
+.cv-icon {
+  padding: 0 1rem 0 0; 
+  height: 1.5rem; 
+  align-self: center;
 }
 </style>

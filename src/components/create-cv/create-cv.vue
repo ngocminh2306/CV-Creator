@@ -3,7 +3,7 @@
     <div class="content">
       <swiper :options="swiperOption">
         <!-- slides -->
-        <swiper-slide v-for="template in templates">
+        <swiper-slide v-for="template in templates" v-bind:key="template.data">
           <b-img
             :src="'http://'+template.preview_img"
             fluid
@@ -25,18 +25,13 @@
           <div class="title">
             <b-form-input placeholder="Title from 6 to 250 characters" v-model="params.title"></b-form-input>
           </div>
-          <div
-            v-bind:style="backgroundImage?{ 'background-image': 'url(' + backgroundImage + ')' }:{ 'background-color': 'white' }"
-            class="cv"
-            ref="cv"
-            id="cv"
-          >
-            <cvtemplate :data="params" :type="type" :key="keyTemplate"></cvtemplate>
+          <div class="cv" ref="cv" id="cv">
+            <cvtemplate style="background: white" :data="getUser" :type="type" :key="keyTemplate"></cvtemplate>
           </div>
         </form>
       </b-container>
-      <div style="padding: 1vh 0px 10vh 0px;">
-        <b-button variant="warning" size="lg" v-on:click="createPDF()">Tạo CV</b-button>
+      <div style="padding: 5vh 0px 10vh 0px;">
+        <b-button style="width: 15%" variant="warning" size="lg" v-on:click="createPDF()">Tạo CV</b-button>
       </div>
     </div>
   </div>
@@ -45,6 +40,7 @@
 <script>
 import cvtemplate from "@/components/templates/cvtemplate";
 import html2canvas from "html2canvas";
+import {Vuex,mapState, mapGetters}  from 'vuex'
 export default {
   components: { cvtemplate },
   name: "createCV",
@@ -53,6 +49,7 @@ export default {
       backgroundImage: "",
       keyTemplate: 0,
       type: "default/default-cv",
+      data: mapGetters(['getUser']),
       params: {
         title: "Title from 6 to 260 characters",
         editorOption: {
@@ -69,18 +66,18 @@ export default {
           email: "email@gmail.com",
           address: "Việt Nam"
         },
-        education: {
+        education: [{
           graduationPlace: "Đại học của bạn",
           name: "Đại học",
           rankings: "10/10"
-        },
-        experience: {
+        }],
+        experience: [{
           company:"Công ty TNHH A",
           from:"10/10/2010",
           to: "10/10/2018",
           position:"Ha Noi",
           desscription:"Chi tiết"
-        }
+        }]
       },
       templates: [],
       swiperOption: {
@@ -106,14 +103,15 @@ export default {
       let height = this.$refs["cv"].clientHeight;
       html2canvas(this.$refs["cv"], { width: width, height: height }).then(
         canvas => {
-          let pdf = new jsPDF();
-          // var hratio = height / width;
+          let pdf = new jsPDF('', 'mm', [width, height]);
 
-          // var w = pdf.internal.pageSize.width;
-          // var h = w * hratio;
-          let preview = canvas.toDataURL("image/png");
-          console.log(preview);
-          pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0);
+          var w = pdf.internal.pageSize.width;
+          var h = pdf.internal.pageSize.height;
+          if(height/width *w > h) {
+            h = height/width *w;
+          }
+          pdf.addImage(canvas.toDataURL("image/png",0.5), "PNG", 0, 0,w,h,"a","FAST");
+
           pdf.save(this.params.title + ".pdf");
         }
       );
@@ -129,6 +127,9 @@ export default {
       .then(res => {
         this.templates = res.data.result.items;
       });
+  },
+  computed: {
+    ...mapGetters(['getUser'])
   }
 };
 </script>
