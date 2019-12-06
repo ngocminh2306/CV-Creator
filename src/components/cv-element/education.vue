@@ -1,12 +1,10 @@
 <template>
-   <div>
-        <b-row>
-            <b-col class="col-content" cols="6"  v-for="(item, index) in editorData" :key="index">
-                <b-button class="remove-button" @click="removeElement(index)" variant="danger">Remove</b-button>
-                <ckeditor :editor="editor" v-model="editorData[index]" :config="editorConfig"></ckeditor>
-            </b-col>
-        </b-row>
-    </div>
+    <b-row>
+        <b-col class="col-content" cols="6"  v-for="(item, index) in editorData" :key="index">
+            <b-button class="remove-button" @click="removeElement(index)" variant="danger">Remove</b-button>
+            <ckeditor :editor="editor" v-model="editorData[index]" :config="editorConfig"></ckeditor>
+        </b-col>
+    </b-row>
 </template>
 <script>
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';
@@ -30,7 +28,7 @@ export default {
         `
         }):[''],
         editor: InlineEditor,
-        editorData: [this.data[0]?`<h4>${this.data[0].name}</h4>
+        editorData: this.data?[this.data[0]?`<h4>${this.data[0].name}</h4>
                 <ul>
                     <li>
                         ${this.data[0].graduationPlace}
@@ -40,7 +38,7 @@ export default {
                     </li>
             </ul>
         `:['']
-        ],
+        ]:[''],
       editorConfig: {
           // The configuration of the editor.
       }

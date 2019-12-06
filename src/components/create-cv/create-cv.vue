@@ -3,9 +3,9 @@
     <div class="content">
       <swiper :options="swiperOption">
         <!-- slides -->
-        <swiper-slide v-for="template in templates" v-bind:key="template.data">
+        <swiper-slide v-for="(template,index) in templates" v-bind:key="index">
           <b-img
-            :src="'http://'+template.preview_img"
+            :src="template.preview_img"
             fluid
             class="image-tamplate"
             v-on:click="slideClick(template)"
@@ -111,8 +111,12 @@ export default {
             h = height/width *w;
           }
           pdf.addImage(canvas.toDataURL("image/png",0.5), "PNG", 0, 0,w,h,"a","FAST");
-
+          pdf.setProperties({
+          title: this.params.title
+          });
+          pdf.output('dataurlnewwindow');
           pdf.save(this.params.title + ".pdf");
+          
         }
       );
     }
@@ -143,7 +147,7 @@ export default {
   }
   .image-tamplate {
     height: 100px !important;
-    width: calc(100px * 3 / 3) !important;
+    width: calc(100px * 3 / 4) !important;
   }
 }
 .swiper-container {
@@ -163,7 +167,7 @@ export default {
 }
 .image-tamplate {
   cursor: pointer;
-  height: 150px;
-  width: calc(150px * 3 / 3);
+  height: 200px;
+  width: calc(200px * 3 / 4);
 }
 </style>

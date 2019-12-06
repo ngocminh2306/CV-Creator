@@ -76,6 +76,7 @@ export default {
       userInfo: { fullName: "" },
       Authenticated: false,
       data: mapGetters(['getUser']),
+      user:'',
       password: "",
       register: {
         user: "",
@@ -177,6 +178,8 @@ export default {
               self.$store.dispatch('addUser',res.data.result)
               self.userInfo.fullName = res.data.result.fullName;
               self.Authenticated = false;
+            }).catch(e=>{
+              this.Authenticated = true;
             })
       } else {
         this.Authenticated = true;

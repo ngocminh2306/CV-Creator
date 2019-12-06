@@ -91,7 +91,7 @@ export default new Router({
       children: [
         {
           path: '/mini-tools/salary-calculate',
-          name: 'salary-calculate',
+          name: 'salary-calculate2',
           component: SalaryCalculate,
         },
         {

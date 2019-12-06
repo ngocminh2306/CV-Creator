@@ -1,12 +1,10 @@
 <template>
-    <div>
-        <b-row>
-            <b-col class="col-content" cols="6"  v-for="(item, index) in editorData" :key="index">
-                <b-button class="remove-button" @click="removeElement(index)" variant="danger">Remove</b-button>
-                <ckeditor :editor="editor" v-model="editorData[index]" :config="editorConfig"></ckeditor>
-            </b-col>
-        </b-row>
-    </div>
+  <b-row>
+    <b-col class="col-content" cols="12" sm="6" md="12"  v-for="(item, index) in editorData" :key="index">
+        <b-button class="remove-button" @click="removeElement(index)" variant="danger">Remove</b-button>
+        <ckeditor :editor="editor" v-model="editorData[index]" :config="editorConfig"></ckeditor>
+    </b-col>
+  </b-row>
 </template>
 <script>
 import InlineEditor from '@ckeditor/ckeditor5-build-inline';

@@ -3,7 +3,7 @@
         <b-row>
             <b-col class="col-content" cols="6"  v-for="(item, index) in editorData" :key="index">
                 <b-button class="remove-button" @click="removeElement(index)" variant="danger">Remove</b-button>
-                <ckeditor :editor="editor" v-model="editorData[index].data" :config="editorConfig"></ckeditor>
+                <ckeditor :editor="editor" v-model="editorData[index]" :config="editorConfig"></ckeditor>
             </b-col>
         </b-row>
     </div>
@@ -35,8 +35,7 @@ export default {
         `
         }):'',
         editor: InlineEditor,
-        editorData: [{
-            data: this.data[0]?`<h4>Chăm sóc khách hàng</h4>
+        editorData: this.data?[this.data[0]?`<h4>Chăm sóc khách hàng</h4>
                 <ul>
                     <li>Tên công ty: ${this.data[0].company}</li>
                     <li>Thời gian bắt đầu: ${this.data[0].from}</li>
@@ -50,8 +49,7 @@ export default {
                         </ul>
                     </li>
             </ul>
-        `:''
-        }],
+        `:'']:[''],
       editorConfig: {
           // The configuration of the editor.
       }
@@ -62,7 +60,7 @@ export default {
           this.editorData.splice(index, 1)
       },
       addElement() {
-          this.editorData.unshift({data: this.defaultData?this.defaultData[0]:''})
+          this.editorData.unshift(this.defaultData?this.defaultData[0]:'')
       }
   },
   mounted() {

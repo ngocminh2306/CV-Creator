@@ -1,32 +1,29 @@
 <template>
   <div class="editor-container">
-    <div class="introduction">
-      <div class="introduction-left" style="display:block">
+    <div class="">
+      <!-- <img src="@/assets/spring.png"/> -->
         <cvAvatar></cvAvatar>
         <div style="display: flex;">
           <img class="cv-icon" src="@/assets/icon/icons8-user-50.png"/>
-          <input class="cv-input" v-model="data.introduction.fullName">
+          <input class="cv-input" v-model="user.fullName">
         </div>
-      </div>
-      <div class="introduction-right">
         <div style="display: flex;">
           <img class="cv-icon" src="@/assets/icon/icons8-phone-50.png"/>
-          <input class="cv-input" v-model="data.introduction.phonenumber">
+          <input class="cv-input" v-model="user.phone_number">
         </div>
         <div style="display: flex;">
           <img class="cv-icon" src="@/assets/icon/icons8-birthday-cake-80.png"/>
-          <input class="cv-input" v-model="data.introduction.birthday">
+          <input class="cv-input" v-model="user.birthday">
         </div>
         <div style="display: flex;">
           <img class="cv-icon" src="@/assets/icon/icons8-email-open-32.png"/>
-          <input class="cv-input" v-model="data.introduction.email">
+          <input class="cv-input" v-model="user.emailAddress">
         </div>
         <div style="display: flex;">
           <img class="cv-icon" src="@/assets/icon/icons8-address-50.png"/>
-          <input class="cv-input" v-model="data.introduction.address">
+          <input class="cv-input" v-model="user.address">
         </div>
       </div>
-    </div>
     <div class="career">
       <h2 style="text-align: left;">CAREER GOALS</h2>
       <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
@@ -35,12 +32,12 @@
       <h2 style="text-align: left;flex: 1">EDUCATION</h2>
       <b-button class="add-button" @click="addEducationElement()">Thêm</b-button>
     </div>
-    <education ref="education" :data="data.education"></education>
+    <education ref="education" :data="data.user.education"></education>
     <div style="display: flex" class="block">
       <h2 style="text-align: left; flex: 1">WORK EXPERIENCE</h2>
       <b-button class="add-button" @click="addExpericenceElement()">Thêm</b-button>
     </div>
-    <expericence ref="expericence" class="expericence" :data="data.experience"></expericence>
+    <expericence ref="expericence" class="expericence" :data="data.user.experience"></expericence>
     <div style="display: flex" class="block">
       <h2 style="text-align: left; flex: 1">LANGUAGES</h2>
       <b-button class="add-button" @click="addLanguageElement()">Thêm</b-button>
@@ -65,6 +62,7 @@ export default {
   },
   data() {
     return {
+        user: this.data.user,
         editor: InlineEditor,
         editorData: `<ul>
           <li>Mong muốn học hỏi kinh nghiệm ở môi trường làm việc chuyên nghiệp, năng động.&nbsp;</li>
@@ -87,6 +85,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.data)
   }
 };
 </script>
@@ -96,7 +95,6 @@ export default {
 @media only screen and (max-width: 768px) {
   .editor-container {
     padding: 0 10px !important;
-    background-color: #f0f2f5c4;
   }
 }
 .block .add-button {
@@ -110,8 +108,8 @@ export default {
 }
 
 .editor-container {
-  padding: 0 60px;
-  background-color: #f0f2f5c4;
+  background-color: #f8f0da63;
+  padding: 1rem 60px;
 }
 .introduction {
   padding-left: 2%;
@@ -122,14 +120,8 @@ export default {
 .introduction-left {
   text-align: left;
 }
-.introduction-right {
-  grid-column: 2 / span 4
-}
-.quill-editor:hover {
-  background: #cdebf650;
-}
 h2 {
-  font-size: 32px
+  color: orange
 }
 .cv-input {
   width: 100%;

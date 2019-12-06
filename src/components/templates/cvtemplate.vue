@@ -1,5 +1,7 @@
 <template>
-  <component v-bind:is="component" :data="data" v-if="component" :key="componentKey"></component>
+  <div>
+    <component v-bind:is="component" :data="data" v-if="component" :key="componentKey"></component>
+  </div>
 </template>
 <script>
 export default {
