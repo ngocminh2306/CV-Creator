@@ -112,11 +112,14 @@ export default {
           }
           pdf.addImage(canvas.toDataURL("image/png",0.5), "PNG", 0, 0,w,h,"a","FAST");
           pdf.setProperties({
-          title: this.params.title
+            title: this.params.title
           });
-          pdf.output('dataurlnewwindow');
-          pdf.save(this.params.title + ".pdf");
-          
+          // window.open(); 
+          // pdf.save(this.params.title + ".pdf");
+          pdf.output('dataurlnewwindow')
+          // console.log(pdf.output('datauristring'))
+          // let pdfWindow = window.open(pdf.output('datauristring'), "MsgWindow")
+          // pdfWindow.document.write("<iframe width='100%' height='100%' src='" +  + "'></iframe>")
         }
       );
     }
